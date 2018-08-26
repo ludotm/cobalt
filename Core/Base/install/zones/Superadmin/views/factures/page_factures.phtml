@@ -1,0 +1,10 @@
+
+    <h1><?= $this->icon('list-alt') ?> Factures</h1>
+
+    <span class="bold">CA Total</span> : <?= $ca_total ?> € TTC - <span class="bold">CA pour le mois dernier</span> : <?= $ca_last_month ?> € TTC
+
+    <div id="factures-container" data-ajax-container="<?= $this->url('superadmin-widget-factures') ?>">
+
+            <?= $this->widget('factures_list') ?>
+ 
+    </div>

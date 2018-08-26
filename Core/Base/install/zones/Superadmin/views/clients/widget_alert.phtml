@@ -1,0 +1,13 @@
+    
+    
+    <?= $form_relance->draw() ?>
+
+    <div class="clear"></div>
+	<br><br>
+
+    <div style="text-align:center">
+
+            <a href="#" data-ajax-callback="cancel_alert_callback" data-ajax-json="<?= $this->url('superadmin-json-clients', array('id'=>$client->id, 'action'=>'cancel-alert')); ?>" class="button inverse <?= ($btn_cancel_active ? '' : 'inactive') ?>">Supprimer la relance</a> 
+            &nbsp;&nbsp;
+
+    </div>

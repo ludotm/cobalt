@@ -1,0 +1,791 @@
+
+/********************************** GRADIENTS  ********************************************/
+
+.linear-gradient-base (@color1:white; @color2:transparent) {
+
+  background-color: @color1; 
+  background-image: -moz-linear-gradient(@dir-base, @color1 0%, @color2 100%); /* FF3.6+ */
+  background-image: -webkit-gradient(linear, @dir-webkit, @dir-webkit2, color-stop(0%, @color1), color-stop(100%,@color2)); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(@dir-base, @color1 0%,@color2 100%); /* Chrome10+,Safari5.1+ */
+  background-image: -o-linear-gradient(@dir-base, @color1 0%, @color2 100%); /* Opera 11.10+ */
+  background-image: -ms-linear-gradient(@dir-base, @color1 0%, @color2 100%); /* IE10+ */
+  background-image: linear-gradient(to @dir-w3c, @color1 0%, @color2 100%); /* W3C */
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=%d)",@color1,@color2,@dir-ie)); /* IE6-9 */
+}
+
+.linear-gradient-multi-base (...) {
+
+  @colors: ~`"@{arguments}".replace(/[\[\]]/g, '')`;
+
+  @numStops: unit(`"@{arguments}".replace(/\([^)]*\)/g,"").split(',').length`);
+  @rawFirst: extract(@arguments,1);
+  @rawLast: extract(@arguments,@numStops);
+
+  .setFirstColor(@color) when (isColor(@color)) {
+     @FirstColor: @color;
+  }
+  .setFirstColor(@color) when not (isColor(@color)) {
+     .setFirstColor(extract(@color,1));
+  }
+  .setLastColor(@color) when (isColor(@color)) {
+     @LastColor: @color;
+  }
+  .setLastColor(@color) when not (isColor(@color)) {
+     .setLastColor(extract(@color,1));
+  }
+
+  .setFirstColor(@rawFirst);
+  .setLastColor(@rawLast);
+
+  background-color: @FirstColor;
+  background-image: -moz-linear-gradient(@dir-base, @colors); /* FF3.6+ */
+  background-image: -webkit-gradient(linear, @dir-webkit, @dir-webkit2, color-stop(0%, @FirstColor), color-stop(100%, @LastColor)); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(@dir-base, @colors); /* Chrome10+,Safari5.1+ */
+  background-image: -o-linear-gradient(@dir-base, @colors); /* Opera 11.10+ */
+  background-image: -ms-linear-gradient(@dir-base, @colors); /* IE10+ */
+  background-image: linear-gradient(to @dir-w3c, @colors); /* W3C */
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=%d)",@FirstColor,@LastColor,@dir-ie)); /* IE6-9 */
+}
+
+.linear-gradient (@color1:white, @color2:transparent) {
+    .linear-gradient-top-vars();
+    .linear-gradient-base (@color1, @color2);
+}
+.linear-gradient-top (@color1:white, @color2:transparent) {
+    .linear-gradient-top-vars();
+    .linear-gradient-base (@color1, @color2);
+}
+.linear-gradient-bottom (@color1:white, @color2:transparent) {
+    .linear-gradient-bottom-vars();
+    .linear-gradient-base (@color1, @color2);
+}
+.linear-gradient-right (@color1:white, @color2:transparent) {
+    .linear-gradient-right-vars();
+    .linear-gradient-base (@color1, @color2);
+}
+.linear-gradient-left (@color1:white, @color2:transparent) {
+    .linear-gradient-left-vars();
+    .linear-gradient-base (@color1, @color2);
+}
+.linear-gradient-top-left (@color1:white, @color2:transparent) {
+    .linear-gradient-top-left-vars();
+    .linear-gradient-base (@color1, @color2);
+}
+.linear-gradient-top-right (@color1:white, @color2:transparent) {
+    .linear-gradient-top-right-vars();
+    .linear-gradient-base (@color1, @color2);
+}
+
+.linear-gradient-multi (@color1:white 0%, @color2:transparent 100%, ...) {
+    .linear-gradient-top-vars();
+    .linear-gradient-multi-base (@arguments);
+}
+.linear-gradient-multi-top (@color1:white 0%, @color2:transparent 100%, ...) {
+    .linear-gradient-top-vars();
+    .linear-gradient-multi-base (@arguments);
+}
+.linear-gradient-multi-bottom (@color1:white, @color2:transparent, ...) {
+    .linear-gradient-bottom-vars();
+    .linear-gradient-multi-base (@arguments);
+}
+.linear-gradient-multi-right (@color1:white, @color2:transparent, ...) {
+    .linear-gradient-right-vars();
+    .linear-gradient-multi-base (@arguments);
+}
+.linear-gradient-multi-left (@color1:white, @color2:transparent, ...) {
+    .linear-gradient-left-vars();
+    .linear-gradient-multi-base (@arguments);
+}
+.linear-gradient-multi-top-left (@color1:white, @color2:transparent, ...) {
+    .linear-gradient-top-left-vars();
+    .linear-gradient-multi-base (@arguments);
+}
+.linear-gradient-multi-top-right (@color1:white, @color2:transparent, ...) {
+    .linear-gradient-top-right-vars();
+    .linear-gradient-multi-base (@arguments);
+}
+
+.linear-gradient-hover (@color) {
+  &:hover {
+    background-color:@blue;
+  }
+}
+
+.linear-gradient-top-vars {
+  @dir-base:top;
+  @dir-webkit:left top;
+  @dir-webkit2:left bottom;
+  @dir-w3c: bottom;
+  @dir-ie: 0;
+};
+.linear-gradient-bottom-vars {
+  @dir-base:bottom;
+    @dir-webkit:left bottom;
+    @dir-webkit2:left top;
+    @dir-w3c: top;
+    @dir-ie: 0;
+};
+.linear-gradient-left-vars {
+  @dir-base:left;
+    @dir-webkit:left top;
+    @dir-webkit2:right top;
+    @dir-w3c: right;
+    @dir-ie: 1;
+};
+.linear-gradient-right-vars {
+  @dir-base:right;
+  @dir-webkit:right top;
+  @dir-webkit2:left top;
+  @dir-w3c: left;
+  @dir-ie: 1;
+};
+.linear-gradient-top-left-vars {
+  @dir-base:top left;
+  @dir-webkit:left top;
+  @dir-webkit2:right bottom;
+  @dir-w3c: right bottom;
+  @dir-ie: 1;
+};
+.linear-gradient-top-right-vars {
+  @dir-base:top right;
+  @dir-webkit:right top;
+  @dir-webkit2:left bottom;
+  @dir-w3c: left top;
+  @dir-ie: 1;
+};
+
+
+
+.radial-gradient (@color1:transparent 0%, @color2:darken(@color1,15%) 100%, @position:center, @shape:circle) {
+  
+  .setFirstColor(@color1) when (isColor(@color1)) {
+     @FirstColor: @color1;
+     @start: 0%;
+  }
+  .setFirstColor(@color1) when not (isColor(@color1)) {
+    @FirstColor: extract(@color1,1);
+    @start: extract(@color1,2);
+  }
+  .setLastColor(@color2) when (isColor(@color2)) {
+     @LastColor: @color2;
+     @end: 100%;
+  }
+  .setLastColor(@color2) when not (isColor(@color2)) {
+     @LastColor: extract(@color2,1);
+     @end: extract(@color2,2);
+  }
+
+  .setFirstColor(@color1);
+  .setLastColor(@color2);
+  
+  background-color: @FirstColor;
+  background-image: -moz-radial-gradient( @position, @shape,  transparent @start, @LastColor @end); 
+  background-image: -webkit-gradient(radial, @position, 0px, @position, 100%, color-stop(@start, transparent), color-stop(@end, @LastColor));
+  background-image: -webkit-radial-gradient( @position, @shape,  transparent @start, @LastColor @end); 
+  background-image: -ms-radial-gradient( @position, @shape,  transparent @start, @LastColor @end); 
+  background-image: -o-radial-gradient( @position, @shape,  transparent @start, @LastColor @end); 
+  background-image: radial-gradient( @shape at @position,  transparent @start, @LastColor @end); 
+}
+.radial-gradient-hover (@color) {
+  &:hover {
+    background-color:@blue;
+  }
+}
+
+.border-gradient (@color1: fade(white, 80%), @color2: fade(black, 70%)) {
+
+    border-color: @color1;
+    -moz-border-image: -moz-linear-gradient(top, @color1 0%, @color2 100%);
+    -webkit-border-image: -webkit-linear-gradient(top, @color1 0%, @color2 100%);
+    -o-border-image: -o-linear-gradient(top, @color1 0%, @color2 100%);
+    border-image: linear-gradient(to bottom, @color1 0%, @color2 100%);
+
+    border-image-slice: 1;
+}
+
+
+/********************************** SHADOWS BOX  ********************************************/
+
+.text-shadow (...) {
+  text-shadow+: @arguments;
+}
+
+.box-shadow-base (@x:2px, @y:3px, @blur:4px, @grossi:0px, @color:fade(black,70%), @inset:'') {
+
+  @dir-ie: 180;
+  -moz-box-shadow+: @x @y @blur @grossi @color e(@inset) ;
+  -webkit-box-shadow+:  @x @y @blur @grossi @color e(@inset) ;
+  -o-box-shadow+:  @x @y @blur @grossi @color e(@inset) ;
+  box-shadow+:  @x @y @blur @grossi @color e(@inset) ;
+  -ms-filter+: %("progid:DXImageTransform.Microsoft.Shadow(Strength=%d, Direction=%d, Color='%d')", @grossi, @dir-ie, @color); /* IE6-9 */
+  filter+: e(%("progid:DXImageTransform.Microsoft.Shadow(Strength=%d, Direction=%d, Color='%d')", @grossi, @dir-ie, @color)); /* IE6-9 */
+}
+
+.drop-shadow (@x:2px, @y:3px, @blur:4px, @color:fade(black,70%), @grossi:0px) {
+  .box-shadow-base (@x, @y, @blur, @grossi, @color );
+}
+.inner-shadow (@x:0px, @y:3px, @blur:3px, @color:fade(black,70%), @grossi:0px) {
+  .box-shadow-base (@x, @y, @blur, @grossi, @color, inset);
+}
+
+/********************************** TRANSITIONS ********************************************/ 
+
+.transition(@duration:0.2s, @ease:ease-out) {
+  -webkit-transition: all @duration @ease;
+  -moz-transition: all @duration @ease;
+  -o-transition: all @duration @ease;
+  transition: all @duration @ease;
+}
+.one-transition(@type:all, @duration:0.2s, @ease:ease-out) {
+  -webkit-transition+: @type @duration @ease;
+  -moz-transition+: @type @duration @ease;
+  -o-transition+: @type @duration @ease;
+  transition+: @type @duration @ease;
+}
+
+/********************************** TRANSFORMATIONS ********************************************/ 
+
+.transform (@val; @origin:0 0) {
+  -webkit-transform+_: @val;
+  -webkit-transform-origin: @origin;
+  -moz-transform+_: @val;
+  -moz-transform-origin: @origin;
+  -ms-transform+_: @val;
+  -ms-transform-origin: @origin;
+  -o-transform+_: @val;
+  -o-transform-origin: @origin;
+  transform+_: @val;
+  transform-origin: @origin;
+}
+
+.rotation(@deg:45deg; @origin:0 0){.transform(rotate(@deg), @origin);}
+.rotateX(@deg:45deg; @origin:0 0){.transform(rotateX(@deg), @origin);}
+.rotateY(@deg:45deg; @origin:0 0){.transform(rotateY(@deg), @origin);}
+.rotateZ(@deg:45deg; @origin:0 0){.transform(rotateZ(@deg), @origin);}
+.rotate3d(@x, @y, @z, @deg:45deg; @origin:0 0){.transform(rotate3d(@x, @y, @z, @deg), @origin);}
+
+.scale(@ratio:1.5; @origin:0 0){.transform(scale(@ratio), @origin);}
+.scaleX(@ratio:1.5; @origin:0 0){.transform(scaleX(@ratio), @origin);}
+.scaleY(@ratio:1.5; @origin:0 0){.transform(scaleY(@ratio), @origin);}
+.scaleZ(@ratio:1.5; @origin:0 0){.transform(scaleZ(@ratio), @origin);}
+.scale3d(@x; @Y; @z; @origin:0 0){.transform(scale3d(@ratio), @origin);}  
+
+.skew (@deg, @deg2, @origin:0 0) {.transform(skew(@deg, @deg2), @origin);}
+.skewX (@deg, @origin:0 0) {.transform(skewX(@deg), @origin);}
+.skewY (@deg, @origin:0 0) {.transform(skewY(@deg), @origin);}
+
+.translation(@x:0; @y:0; @origin:0 0) {.transform(translate(@x, @y), @origin);}
+.translateX(@x:0; @origin:0 0) {.transform(translateX(@x), @origin);}
+.translateY(@y:0; @origin:0 0) {.transform(translateY(@y), @origin);}
+.translateZ(@z:0; @origin:0 0) {.transform(translateZ(@z), @origin);}
+.translate3d(@x:0; @y:0; @z:0; @origin:0 0) {.transform(translate(@x, @y, @z), @origin);}
+
+.perspective (@value:800px) {
+  -webkit-perspective: @value;
+  -moz-perspective: @value;
+  -ms-perspective: @value;
+  -o-perspective: @value;
+  perspective: @value;
+}
+
+/********************************** FILTERS  ********************************************/
+
+
+.filter (@func) {
+  filter+_: @func;
+  -webkit-filter+_: @func;
+  -moz-filter+_: @func;
+  -o-filter+_: @func;
+  -ms-filter+_: @func;
+}
+
+.saturate (@pct) {.filter(saturate(@pct));}
+
+.brightness (@pct) {.filter(brightness(@pct));}
+
+.contrast (@pct) {.filter(contrast(@pct));}
+
+.hue (@angle) {.filter(hue-rotate(@angle));}
+
+.blur (@px) {.filter(blur(@px));}
+
+.grayscale (@pct:100%) when (@pct >99%) {
+  .filter(grayscale(@pct));
+  //filter+_: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
+  //-ms-filter+_: gray; /* IE6-9 */
+}
+.grayscale (@pct:100%) when (@pct <1%) {
+  .filter(grayscale(@pct));
+  //filter+_: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
+}
+
+.opacity(@opacity: 0.5) {
+  -moz-opacity: @opacity;
+  -khtml-opacity: @opacity;
+  -webkit-opacity: @opacity;
+  opacity: @opacity;
+  /*
+  @opperc: @opacity * 100;
+  -ms-filter+_: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+  filter+_: ~"alpha(opacity=@{opperc})";
+  */
+}
+
+
+
+/********************************** TEXTE A COLONNES (FACON JOURNAL)  ********************************************/
+
+.columns(@colwidth: 250px, @colcount: 0, @colgap: 50px, @columnRuleColor: #CDCDCD, @columnRuleStyle: solid, @columnRuleWidth: 1px) {
+  -moz-column-width: @colwidth;
+  -moz-column-count: @colcount;
+  -moz-column-gap: @colgap;
+  -moz-column-rule-color: @columnRuleColor;
+  -moz-column-rule-style: @columnRuleStyle;
+  -moz-column-rule-width: @columnRuleWidth;
+  -webkit-column-width: @colwidth;
+  -webkit-column-count: @colcount;
+  -webkit-column-gap: @colgap;
+  -webkit-column-rule-color: @columnRuleColor;
+  -webkit-column-rule-style: @columnRuleStyle;
+  -webkit-column-rule-width: @columnRuleWidth;
+  column-width: @colwidth;
+  column-count: @colcount;
+  column-gap: @colgap;
+  column-rule-color: @columnRuleColor;
+  column-rule-style: @columnRuleStyle;
+  column-rule-width: @columnRuleWidth;
+}
+
+
+/********************************** DIVERS  ********************************************/
+
+.background-clip(@argument: padding-box) {
+  -moz-background-clip: @argument;
+  -webkit-background-clip: @argument;
+  background-clip: @argument;
+}
+
+.box-sizing(@type:border-box) {
+  -webkit-box-sizing: @type; 
+  -moz-box-sizing: @type;   
+  box-sizing: @type;       
+}
+
+.placeholder(@color: @input-color-placeholder, @font-style:normal, @font-weight:normal) {
+  &:-moz-placeholder            { color: @color; font-style:@font-style; font-weight: @font-weight;} // Firefox 4-18
+  &::-moz-placeholder           { color: @color; font-style:@font-style; font-weight: @font-weight;} // Firefox 19+
+  &:-ms-input-placeholder       { color: @color; font-style:@font-style; font-weight: @font-weight;} // Internet Explorer 10+
+  &::-webkit-input-placeholder  { color: @color; font-style:@font-style; font-weight: @font-weight;} // Safari and Chrome
+}
+
+
+
+/********************************** ANIMATION ********************************************/
+
+.anim-test2 {
+  
+  @animation-name:change-color;
+
+  @frames: {
+    0% {color: blue;}
+    50% {color: green;}
+    100% {color: white;}
+  };
+  @frames: {
+    0% {font-size:30px;}
+    100% {font-size:10px;}
+  };
+
+  .keyframes (@animation-name, @frames);
+
+  
+  &:hover {
+    .animate(@animation-name, 1s, ease-in-out, infinite);
+  }
+}
+
+/*
+  
+    animation-name: Où on indique le nom de l'animation à utiliser. (obligatoire)
+    animation-duration: Où on indique la durée en milliseconde (ms) ou en seconde (s) de l'animation. (Obligatoire)  
+    animation-timing-function: Définit un effet de timing à utiliser (le modèle d'interpolation) entre chaque keyframe. Comme vu précédemment, cette propriété est également modifiable au sein même d'une keyframe. (Facultative)
+    animation-delay: Cette valeur définira un délai d'attente avant le début de l'animation, ou dans le cas d'une valeur négative, l'avance que doit prendre l'animation avant de débuter. (Facultative)
+    animation-iteration-count: Le nombre de fois que l'animation doit être effectué. La valeur devra être un nombre entier ou le mot clé infinite pour que l'animation se répète à l'infinie. La valeur par défaut est de 1. (Facultative)
+    animation-direction: Définira si l'animation doit toujours jouer du début à la fin, ou si une fois rendu à la fin, elle doit refaire l'animation en sens inverse. Par défaut l'animation recommencera du début (normal), mais l'utilisation du mot clé alternate alternera la direction de l'animation. Démonstration d'animation-direction (Facultative)
+    animation-fill-mode: Cette propriété définit l'état de départ et de fin de votre animation. Voici les différentes valeurs possibles:
+    forwards: indique au navigateur de laisser l'élément dans sont état final lors de la dernière itération. (l'élément ne revient donc pas à son état initial)
+    backwards: indique au navigateur de placer l'élément dans son état définit au keyframe 0% au chargement de la page, même si un délais négatif est indiqué.
+    both: appliquera les deux valeurs précédentes.
+    none: indiquera au navigateur de styler l'élément selon son état à la première keyframe visible (dans le cas d'un délais négatif) et de ramener l'animation à la keyframe 0% après la dernière itération. Ceci est le comportement par défaut.
+    
+    linear  The animation has the same speed from start to end  Play it » 
+    ease  Default value. The animation has a slow start, then fast, before it ends slowly   Play it » 
+    ease-in   The animation has a slow start  Play it » 
+    ease-out  The animation has a slow end  Play it » 
+    ease-in-out   The animation has both a slow start and a slow end  Play it » 
+    cubic-bezier(n,n,n,n)   Define your own values in the cubic-bezier function
+    Possible values are numeric values from 0 to 1  
+    initial   Sets this property to its default value. Read about initial   
+    inherit
+
+    selecteur {
+      animation: <name> <duration> <timing-function> <delay> <iteration-count> <direction> <fill-mode>;
+    }
+
+  sessions agoravox
+*/
+
+.anim-return-block () {
+
+}
+.anim-scale-opacity () {
+
+}
+.anim-cube (@name, @color, @dist1, @dist2, @duration:0.5s, @delay:0s, @timing:ease-in-out) {
+  
+  .shadow-cube(@color, @dist1);
+
+  .one-animation (~"@{name}-1", @duration, @delay, {
+        from{
+          top: @dist1;
+          left: @dist1;
+        }
+        to {
+          top: @dist2;
+          left: -@dist2;
+        }
+        
+      }, @timing);
+
+  &:after {
+      .one-animation (~"@{name}-2", @duration, @delay, {
+        from{
+           height: @dist1;
+            top: -@dist1;
+        }
+        to {
+          height: @dist2;
+            top: -@dist2;
+        }
+        
+      }, @timing);
+  }
+
+  &:before {
+      .one-animation (~"@{name}-3", @duration, @delay, {
+        from{
+          width: @dist1;
+          right: -@dist1;
+        }
+        to {
+          width: @dist2;
+          right: -@dist2;
+        }
+        
+      }, @timing);
+  }
+
+}
+.anim-cube-block-out (@name, @color, @dist1, @dist2, @duration:0.5s, @delay:0s, @timing:ease-in-out) {
+
+  .shadow-block(@color, @dist1);
+
+  .one-animation (~"@{name}-shadow", @duration, @delay, {
+        from{
+          .scale(1, 50% 50%);
+          margin-top: @dist1;
+          .drop-shadow(0px, 0px, 0px, fade(black, 0%));
+        }
+        to {
+          .scale(1.1, 50% 50%);
+          margin-top: @dist2*4;
+          .drop-shadow(0px, @dist2/2, @dist2/2, fade(black, 20%));
+        }
+        
+  }, @timing);
+
+  &:after {
+      .one-animation (@name, @duration, @delay, {
+        from{
+          border:@dist1 solid transparent;
+          border-bottom: @dist1 solid lighten(@color, 20%);
+          top: -@dist1;
+        }
+        to {
+          border:@dist2 solid transparent;
+          border-bottom: @dist2 solid lighten(@color, 20%);
+          top: -@dist2;
+        }
+        
+      }, @timing);
+  }
+}
+.anim-cube-block-in (@name, @color, @dist1, @dist2, @duration:0.5s, @delay:0s, @timing:ease-in-out) {
+
+  .shadow-block(@color, @dist2);
+
+  .one-animation (~"@{name}-shadow", @duration, @delay, {
+        from{
+          .scale(1.1, 50% 50%);
+          margin-top: @dist2*4;
+          .drop-shadow(0px, @dist2/2, @dist2/2, fade(black, 20%));
+        }
+        to {
+          .scale(1, 50% 50%);
+          margin-top: @dist1;
+          .drop-shadow(0px, 0px, 0px, fade(black, 0%));
+        }
+        
+  }, @timing);
+
+  &:after {
+      .one-animation (@name, @duration, @delay, {
+        from{
+          border:@dist2 solid transparent;
+          border-bottom: @dist2 solid lighten(@color, 20%);
+          top: -@dist2;
+        }
+        to {
+          border:@dist1 solid transparent;
+          border-bottom: @dist1 solid lighten(@color, 20%);
+          top: -@dist1;
+        }
+        
+      }, @timing);
+  }
+}
+.anim-cube-block-hover (@name, @color, @dist1, @dist2, @duration:0.5s, @delay:0s, @timing:ease-in-out) {
+
+  .anim-cube-block-in(~"@{name}-in", @color, @dist1, @dist2, @duration, @delay, @timing);
+  &:hover {
+    .anim-cube-block-out(@name, @color, @dist1, @dist2, @duration, @delay, @timing);
+  }
+}
+
+.anim-explode-contours (@name, @color, @strengh:1px, @rounded:0px, @duration:0.3, @delay:0, @timing:ease-in-out) {
+
+    position: relative;
+    z-index: 2;
+   
+    &:after {
+      width:100%;
+      height:100%;
+      content: ' ';
+      position: absolute;
+
+      border:@strengh solid @color;
+      background-color: transparent;
+      z-index: 1;
+
+      .rounded(@rounded);
+      .opacity(0);
+    }
+
+    &:hover:after {
+      .one-animation (@name, @duration, @delay, {
+        from {
+          .scale(1, 50% 50%);
+          .opacity(1);
+        }
+        to {
+          .scale(2, 50% 50%);
+          .opacity(0);
+        }
+      }, @timing);
+    }
+}
+
+.flip-box (@width, @height, @transition:0.6s, @perspective:800px) {
+  .size(@width, @height);
+  .perspective(@perspective);
+  transform-style: preserve-3d;
+  
+  &:hover .flipper, 
+  .hover .flipper {
+    .rotateY(180deg, 50% 50%);
+  }
+  .flipper {
+    position: relative;
+    .transition(@transition);
+    transform-style: preserve-3d;
+  }
+  .front, .back {
+    .size(@width, @height);
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .front {
+    z-index: 2;
+    .rotateY(0deg);
+  }
+  .back {
+    .rotateY(180deg, 50% 50%);
+  }
+}
+.flip-box-vertical (@width, @height, @transition:0.6s, @perspective:800px) {
+  .size(@width, @height);
+  .perspective(@perspective);
+  transform-style: preserve-3d;
+
+  &:hover .flipper, 
+  .hover .flipper {
+    .rotateX(180deg, 50% 50%);
+  }
+  .flipper {
+    position: relative;
+    .transition(@transition);
+    transform-style: preserve-3d;
+  }
+  .front, .back {
+    .size(@width, @height);
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .front {
+    z-index: 2;
+    .rotateX(0deg, 0% 0%);
+  }
+  .back {
+    .rotateX(180deg, 0% 0%);
+  }
+}
+
+.anim-infinite-rotation (@name, @duration:2s, @delay:0) {
+
+  .infinite-animation(@name, @duration, @delay, {
+      from {.rotation(0deg, 50% 50%);}
+      to {.rotation(360deg, 50% 50%);}
+  }, linear);
+}
+.anim-translation () {
+  .quick-animation(anim3, 0.8s, 0s, margin-left, 320px, 0px);
+  .quick-animation(anim3, 0.8s, 0s, margin-left, 320px, 0px);
+}
+.anim-translation (@name, @direction, @pos, @dist, @delay:0s, @duration:0.5s, @timing:ease-in-out) {
+  position: absolute;
+  z-index: 1;
+  .opacity(0);
+  @{direction}: @pos;
+
+  .one-animation (@name, @duration, @delay, {
+    from {
+      @{direction}:@pos+@dist;
+      .opacity(0);
+    }
+    to {
+      @{direction}:@pos;
+      .opacity(1);
+    }
+  }, @timing);
+}
+
+.anim-blur-opacity (@name, @strengh, @delay:0s, @duration:0.5s, @letterspacing:0px, @timing:ease-in-out) {
+
+  .opacity(0);
+
+  .one-animation (@name, @duration, @delay, {
+    from {
+      letter-spacing: @letterspacing;
+      .blur(@strengh);
+      .opacity(0);
+    }
+    to {
+      letter-spacing: 0px;
+      .blur(0px);
+      .opacity(1);
+    }
+  }, @timing);
+}
+
+.anim-levitation (@name, @dist:15px, @duration:1s, @delay:0s) {
+  
+  position: relative;
+  z-index: 1;
+  
+  div.levitation-object {
+    width:100%;
+    height:100%;
+    position: absolute;
+    z-index: 3;
+
+    .infinite-animation-alternate(@name, @duration, @delay, {
+        from {bottom:0px;}
+        to {bottom:@dist;}
+    });  
+  }
+
+  div.levitation-shadow {
+    position: absolute;
+    width: 100%;
+    height:1px;
+    bottom: @dist;
+    background-color: fade(black, 0%);
+    z-index: 1;
+
+    .drop-shadow(0, @dist, 4px, fade(black, 40%));
+    .drop-shadow(0, @dist, 8px, fade(black, 60%));
+    .drop-shadow(0, @dist, 15px, fade(black, 90%));
+    .drop-shadow(0, @dist, 20px, fade(black, 100%));
+
+    .infinite-animation-alternate(test-shadow, @duration, @delay, {
+        from {width:90%; margin-left:5%;}
+        to {width:74%; margin-left:13%;}
+    }); 
+  }
+}
+
+
+.animation (@name, @animation-params, @frames) {
+  .keyframes (@name, @frames);
+  .animate(@name, @animation-params);
+}
+.quick-animation (@name, @duration, @delay, @param, @from, @to, @timing:ease-in-out) {
+  .animation (@name, @duration @timing @delay 1 forwards, {from {@{param}:@from;} to {@{param}:@to;}});
+}
+.one-animation (@name, @duration, @delay:0s, @frames, @timing:ease-in-out) {
+  .animation (@name, @duration @timing @delay 1 forwards, @frames);
+}
+.infinite-animation (@name, @duration, @delay:0s, @frames, @timing:ease-in-out) {
+  .animation (@name, @duration @timing infinite, @frames);
+}
+.infinite-animation-alternate (@name, @duration, @delay:0s, @frames, @timing:ease-in-out) {
+  .animation (@name, @duration @timing @delay infinite alternate, @frames);
+}
+
+
+.timing (@timing: ease-in-out) {
+  -webkit-animation-timing-function: @timing;
+  -moz-animation-timing-function: @timing;
+  -o-animation-timing-function: @timing;
+  -ms-animation-timing-function: @timing;
+  animation-timing-function: @timing;
+}
+
+.keyframes (@name, @frames) {
+  
+  @-webkit-keyframes @name {@frames();}
+  @-moz-keyframes @name {@frames();}
+  @-ms-keyframes @name {@frames();}
+  @-o-keyframes @name {@frames();}
+  @keyframes @name {@frames();}
+}
+.animate (...) {
+
+  -webkit-animation: @arguments;
+  -moz-animation: @arguments;
+  -o-animation: @arguments;
+  -ms-animation: @arguments;
+  animation: @arguments;
+}
+
+.animation-pause {
+  -webkit-animation-play-state:paused;
+  -moz-animation-play-state:paused;
+  -ms-animation-play-state:paused;
+  -o-animation-play-state:paused;
+  animation-play-state:paused;
+}

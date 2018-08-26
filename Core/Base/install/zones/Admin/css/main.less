@@ -1,0 +1,99 @@
+
+/* TEMPLATE */
+@base-text-color:#737579;
+@background-color:#FFF;
+@color1:#d94561; 
+@color2:#d94561; 
+@color3:#147ba8;
+@dark-color: #1a2430; 
+@dark-color2: #272c38;
+@light-color: #D3D3D3; 
+@import "/plugins/less/framework.less";
+@import "/plugins/cobalt/templates/webapp1.less";
+
+
+/* -------------------- BASE -------------------------- */
+
+body {  
+	font-family: 'Asap', sans-serif; 
+	font-weight: 300;
+}
+h1 {
+	font-family: 'Oxygen', sans-serif;
+	font-size: 45px;	
+	font-weight: 300;
+}
+h2 {
+	font-family: 'Oxygen', sans-serif;
+	font-size: 20px;
+	font-weight: 300;
+}
+
+table td {
+	padding:4px;
+}
+
+/* -------------------- PAGE LOGIN -------------------------- */
+
+#background-login {
+	background-image: url('../img/radial.jpg');
+	background-position: center center;
+	background-color: @dark-color;
+	background-repeat: no-repeat;
+
+	display: table;
+	.fullscreen();
+}
+
+#background-login-cell {
+	display: table-cell;
+	vertical-align: middle; 
+	text-align: center;
+}
+#login-form-container {
+
+	background:white; 
+	padding:40px 65px; 
+	width:500px;
+	display: inline-block;
+	.rounded(10px);
+	//.shadow-bulge();
+}
+
+#login-form-container .logo {
+
+	display: inline-block;
+}
+
+#login-form-container input {
+	width: 100%;
+	border: 0;
+	background-color: #FAFAFA;
+}
+#login-form-container input[type="submit"] {
+	width: auto;
+	border: 0;
+	background-color: @color2;
+	color: white;
+	padding: 10px 20px; 
+	float: right;
+}
+
+
+/* -------------------- RESPONSIVE -------------------------- */
+
+@media (min-width: 1200px) {/* LG,  écran large */ 
+
+}
+@media (max-width: 1200px) { /* MD,  écran moyen */
+
+}
+@media (max-width: 992px) { /* XS, tablette */
+
+	
+}
+@media (max-width: 767px) { /* SM,  mobile */
+
+}
+
+

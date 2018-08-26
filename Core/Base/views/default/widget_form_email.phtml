@@ -1,0 +1,40 @@
+
+<?php if ($mail_sent) : ?>
+
+	<br><br>
+	<div class="text-center">Votre Email a bien été envoyé.</div>	
+	<br><br>
+
+<?php else : ?>
+
+	Envoyer un email à : <strong><?= $email ?></strong> 
+	<hr>
+	<?= $form->draw(); ?>
+
+	<hr>
+
+	<div style="padding:10px;">
+
+	<?php if (!$can_use_spothit) : ?>
+	<div class="campain-info text-red">* Vous devez être abonné pour utiliser le mode Premium.</div>
+	<?php endif; ?>
+
+	<?php if ($show_tarif) : ?>
+	    <div class="campain-info">
+	        * Consulter les <a href="#" data-ajax="<?= $this->url('admin-widget-tarifs',array('type'=>'email')) ?>" data-ajax-target="#consumables-cost-mini" data-toggle-show="#consumables-cost-mini">tarifs et caractéristiques Basic / Premium</a>
+
+	        <div id="consumables-cost-mini" style="display:none;">sdsdsds</div>
+	    </div>
+	<?php endif; ?>
+
+	</div>
+
+<?php endif; ?>
+
+ 
+
+
+
+
+
+

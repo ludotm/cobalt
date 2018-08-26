@@ -1,0 +1,51 @@
+
+<?php if ($step == 1 ) : ?>
+
+<h2>Etape 1 : paramétrage des accès</h2>
+<hr>
+
+<form action="" method="POST"  role="form"  class="form-horizontal" >
+
+	<input type="hidden" name="step" value="<?= $step ?>" />
+
+	<div class="form-group">
+	    <label class="control-label col-sm-2" for="bdd">Nom de la base de donnée</label>
+	    <div class="col-sm-10">
+	      <input type="text" name="bdd" required="required">
+	    </div>
+	</div>
+
+	<div class="form-group">
+	    <label class="control-label col-sm-2" for="username">Nom d'utilisateur</label>
+	    <div class="col-sm-10">
+	      <input type="text" name="username" required="required">
+	    </div>
+	</div>
+
+	<div class="form-group">
+	    <label class="control-label col-sm-2" for="password">Mot de passe</label>
+	    <div class="col-sm-10">
+	      <input type="password" name="password">
+	    </div>
+	</div>
+
+	<div class="form-group">
+	    <label class="control-label col-sm-2" for="submit"></label>
+	    <div class="col-sm-10">
+	      <input type="submit" name="submit" value="Envoyer">
+	    </div>
+	</div>
+
+</form>
+
+<?php elseif ($step == 2 ) : ?>
+
+<h2>Etape 2 : création de la base de donnée</h2>
+<hr>
+
+<?php elseif ($step == 3 ) : ?>
+
+<h2>L'installation est terminée !</h2>
+<hr>
+
+<?php endif; ?>

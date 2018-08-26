@@ -1,0 +1,42 @@
+
+<?php if ($sms_sent) : ?>
+	<br><br>
+	<div class="text-center">Votre SMS a bien été envoyé.</div>	
+	<br><br>
+
+<?php else : ?>
+
+	Envoyer un SMS à : <strong><?= $num ?></strong> 
+	<hr>
+	<?= $form->draw(); ?>
+
+	<hr>
+
+	<div style="padding:20px; padding-top:0px;">
+
+	<?php if ($too_many_chars) : ?>
+	<div class="campain-info text-red">* Le mode Basic ne permet pas d'envoyer de message d'une longeur supérieure à 160 caractères.</div>
+	<?php endif; ?>
+
+	<div class="campain-info">* La mention "STOP au 36184" est légalement obligatoire pour les SMS commerciaux.</div>
+    <div class="campain-info">* Les SMS commerciaux sont interdits par la loi du lundi au samedi entre 20h et 8h du matin, ainsi que le dimanche et les jours fériés.</div>
+
+     <?php if ($show_tarif) : ?>
+      <div class="campain-info">
+            * Consulter les <a href="#" data-ajax="<?= $this->url('admin-widget-tarifs',array('type'=>'sms')) ?>" data-ajax-target="#consumables-cost-mini" data-toggle-show="#consumables-cost-mini">tarifs et caractéristiques Basic / Premium</a>
+
+            <div id="consumables-cost-mini" style="display:none;"></div>
+      </div>
+      <?php endif; ?>
+
+  	</div>
+
+<?php endif; ?>
+
+ 
+
+
+
+
+
+

@@ -1,0 +1,51 @@
+
+
+    <?php if ($action == 'list') : ?>
+
+        <section>
+
+            <div class="row table-control">
+
+                <div class="col-sm-6">
+                    <h2>Liste des template</h2>
+                </div>
+
+                <div class="col-sm-6"  style="padding-top:10px;">
+                    <a href="#" id="add-campain" data-ajax="<?= $this->url('superadmin-widget-template', array('action'=>'form')) ?>" data-transition="slide-left" class="button inverse"><?= $this->icon('clipboard') ?>  Ajouter un template</a>  
+                </div>
+
+            </div>
+
+            <div class="table-responsive">
+                <?= $table->draw() ?>
+            </div>
+
+        </section>
+
+        
+    <?php elseif ($action == 'form') : ?>
+
+        <section>
+
+            <a href="#" class="return-arrow" data-ajax="<?= $this->url('superadmin-widget-template', array('action' => 'list')) ?>" data-transition="slide-right" style="position:absolute; top:-130px; right:15px;">
+                <?= $this->icon('arrow-left') ?><!--arrow-circle-o-left-->
+            </a>
+
+            <h2><?= !$form->get('id')->value ? 'Ajouter' : 'Modifier' ?> un template</h2>
+
+            <?= $form->draw('1000px'); ?>
+
+        </section>
+
+
+    <?php elseif ($action == 'view') : ?>
+
+        <section data-campain-id="<?= $template->id ?>">
+            
+            <h2 style="margin-top:0;"><?= $template->name ?></h2>
+
+            <iframe src="<?= $this->url('superadmin-page-template_preview', array('id'=>$template->id)) ?>" style="width:100%; height:400px; border:1px solid #AAA;"></iframe>
+
+        <section>
+
+    <?php endif; ?>

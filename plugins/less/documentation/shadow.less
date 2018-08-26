@@ -1,0 +1,288 @@
+
+
+/********************************** SHADOW ********************************************/ 
+/*
+.inner-shadow(@horizontal:1px, @vertical:2px, @blur:2px, @alpha: 0.4) {
+  -webkit-box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
+  -moz-box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
+  box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
+}*/
+.inner-light(@horizontal:0px, @vertical:1px, @blur:0px, @alpha: 0.8) {
+  -webkit-box-shadow: inset @horizontal @vertical @blur rgba(255, 255, 255, @alpha);
+  -moz-box-shadow: inset @horizontal @vertical @blur rgba(255, 255, 255, @alpha);
+  box-shadow: inset @horizontal @vertical @blur rgba(255, 255, 255, @alpha);
+}/*
+.drop-shadow(@x-axis: 1px, @y-axis: 2px, @blur: 2px, @alpha: 0.4) {
+  -webkit-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+  -moz-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+  box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+}*/
+
+
+
+
+
+.shadow-cube(@color:gray, @height:15px){
+
+  position: relative;
+
+  &:after,&:before{
+    position: absolute;
+    display: block;
+    content: " ";
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+  }
+
+  &:after{
+    background-color: lighten(@color, 20%);
+    height: @height;
+    top: -@height;
+
+    .transform(~"skewX(-45deg)"; 0 100%);
+  } 
+  &:before{
+    background-color: lighten(@color, 10%);
+    width: @height;
+    right: -@height;
+
+    .transform(~"skewY(-45deg)"; 0 100%);
+  }
+}
+
+.shadow-cube-inverse(@color:gray, @height:15px){
+
+  position: relative;
+
+  &:after,&:before{
+    position: absolute;
+    display: block;
+    content: " ";
+    height: 100%;
+    width: 100%;
+  }
+
+  &:after{
+    background-color: lighten(@color, 10%);
+    height: @height;
+    bottom: -@height;
+    left:@height;
+    bottom:-@height;
+    .transform(~"skewX(225deg)"; 0 100%);
+  }
+  &:before{
+    background-color: lighten(@color, 20%);
+    width: @height;
+    right: -@height;
+    .transform(~"skewY(-135deg)"; 0 100%);
+  }
+}
+
+.shadow-block(@color:gray, @height:15px){
+
+  position: relative;
+  
+  &:after{
+    .box-sizing(border-box);
+    border:@height solid transparent;
+    border-top: none;
+    border-bottom: @height solid lighten(@color, 20%);
+    height: 0;
+    top: -@height;
+    position: absolute;
+    display: block;
+    content: " ";
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+}
+
+.shadow-extrapol(@color:gray, @height:150px){
+
+  position: relative;
+
+  &:after,&:before{
+    position: absolute;
+    display: block;
+    content: " ";
+    height: 100%;
+    width: 100%;
+  }
+
+  &:after{    
+    .linear-gradient(@color, fade(@color,0%));
+    height: @height;
+    bottom: -@height;
+    left:@height;
+    bottom:-@height;
+    .transform(~"skewX(225deg)"; 0 100%);
+  }
+  &:before{
+    .linear-gradient(@color, fade(@color,0%));
+    width: @height;
+    right: -@height;
+
+    .transform(~"skewY(-135deg)"; 0 100%);
+  }
+}
+
+.shadow-deco(@color:gray, @height:10px){
+  box-shadow: @height @height 0 @height lighten(@color, 20%), -@height -@height 0 @height lighten(@color, 15%);
+}
+
+.shadow-hr (@color, @height:30px, @border:2px solid white) {
+
+  position:relative;
+  width: 100%;
+  z-index:2;
+
+  &:after {
+      content: " ";
+      width: 100%;
+      position: absolute;
+      height: 0px;
+      top: @height*1.41/2;
+      border-bottom: 1px dashed lighten(@color,20%);
+      z-index:1;
+  }
+
+  div {
+    .square(@height);
+    background-color: @color;
+    .rotation(45deg);
+    position: relative;
+    border: @border;
+    z-index: 3;
+    margin-left: auto;
+    margin-right: auto;
+    .drop-shadow(-@height/2, @height/2, 0px, lighten(@color,20%), -@height/100*20);
+    .drop-shadow(@height/2, -@height/2, 0px, lighten(@color,20%), -@height/100*20);
+  }
+}
+
+
+.shadow-bulge(@shadow:@dark-gray, @opacity:100%){
+
+  position: relative;
+  //z-index: 1;
+
+  &:before{
+    .box-shadow-base(0px, 10px, 10px, fade(@shadow, @opacity), -5px);
+    .rounded-all(0, 50% 15px, 50% 15px, 0);
+    display: block;
+    position: absolute;
+    content: " ";
+    z-index: -1;
+    height: 20px;
+    width: 100%;
+    bottom: 0;
+
+  }
+}
+
+.shadow-dogear(@shadow:@dark-gray, @opacity:100%, @dist:13px, @dist:13px, @grossi:-6px){
+
+  position: relative;
+  //z-index: 1;
+
+  &:after,&:before{
+    .box-shadow-base(0px, @dist, 10px, fade(@shadow, @opacity), @grossi);
+    display: block;
+    position: absolute;
+    content: " ";
+    z-index: -1;
+    height: 100%;
+    width: 70%;
+    bottom: 0px;
+  }
+  &:after{
+
+    .rounded-all(0, 100% 30%, 0, 0) ;
+    left:0;
+  }
+  &:before{
+    .rounded-all(0, 0, 100% 30%, 0) ;
+    right:0;
+  }
+}
+
+.shadow-dogear-right(@shadow:@dark-gray, @opacity:100%, @dist:13px, @dist:13px, @grossi:-6px){
+
+  position: relative;
+  //z-index: 1;
+
+  &:before{
+    .box-shadow-base(0px, @dist, 10px, fade(@shadow, @opacity), @grossi);
+    .rounded-all(0, 0, 100% 30%, 0) ;
+    display: block;
+    position: absolute;
+    content: " ";
+    z-index: -1;
+    height: 100%;
+    width: 70%;
+    bottom: 0px;
+    right:0;
+  }
+}
+ 
+.shadow-float(@shadow:@dark-gray, @opacity:100%, @dist:15px, @grossi:7px){
+
+  position: relative;
+  //z-index: 1;
+
+  &:after{
+    .box-shadow-base(0px, @dist, 10px, fade(@shadow,@opacity));
+    .rounded(50%);
+    display: block;
+    content: " ";
+    z-index: -1;
+    height: @grossi;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+  }
+}
+
+.shadow-cast(@shadow:@dark-gray, @opacity:40%, @height:30%){
+
+  position: relative;
+  //z-index: 1;
+
+  &:after{
+    .linear-gradient (fade(@shadow,@opacity) 0, fade(@shadow,0%) 100%);
+    position: absolute;
+    display: block;
+    content: " ";
+    z-index: -1;
+    height: @height;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+
+    .transform(~"skewX(-45deg)"; 100% 100%);
+  }
+}
+
+.shadow-fore(@shadow:@dark-gray, @opacity:40%, @height:20px){
+
+  position: relative;
+  //z-index: 1;
+
+  &:after{
+    .linear-gradient (fade(@shadow,@opacity) 0, fade(@shadow,0%) 100%);
+
+    position: absolute;
+    display: block;
+    content: " ";
+    z-index: -1;
+    height: @height;
+    bottom: -@height;
+    right: 0;
+    left: 0;
+
+    .transform(~"skewX(45deg)"; 0 0);
+  }
+}

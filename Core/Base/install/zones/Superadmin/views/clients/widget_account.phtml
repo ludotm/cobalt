@@ -1,0 +1,229 @@
+        
+        <style>
+            .submenu a:link, .submenu a:visited { color:#AAA; }
+            .submenu a:hover, .submenu a:active { color:#CCC; }
+            .submenu.active a:link, .submenu.active a:visited { color:#95b515; }
+            .submenu.active a:hover, .submenu.active a:active { color:#95b515; }
+            .submenu {padding-top:10px;}
+            .submenu.current { padding-top:0px;}
+
+            .listing {
+                width:100%;
+            }
+            .listing tr {
+                border-bottom:1px solid #DDD;
+            }
+            .listing td {
+                padding-bottom:3px;
+                padding-top:3px;
+            }
+        </style>
+        <div class="row">
+            <div class="col-md-2 text-center submenu <?= $active_buttons['dossier'] ? 'active' : '' ?> <?= $section == 'dossier' ? 'current' : '' ?>">
+                <a href="#" data-ajax="<?= $this->url('superadmin-widget-account', array('id'=>$client->id, 'section'=>'dossier')) ?>">
+
+                    <?= $this->icon('folder-open','x2 ') ?><br>
+                Dossier</a>
+            </div>
+
+            <div class="col-md-2 text-center submenu <?= $active_buttons['param'] ? 'active' : '' ?> <?= $section == 'param' ? 'current' : '' ?>">
+                <a href="#" data-ajax="<?= $this->url('superadmin-widget-account', array('id'=>$client->id, 'section'=>'param')) ?>">
+
+                    <?= $this->icon('cog','x2 '.($active_buttons['param'] ? 'active' : '')) ?><br>
+                Paramétrage auto</a>
+            </div>
+
+            <div class="col-md-2 text-center submenu <?= $active_buttons['access'] ? 'active' : '' ?> <?= $section == 'access' ? 'current' : '' ?>">
+                <a href="#" data-ajax="<?= $this->url('superadmin-widget-account', array('id'=>$client->id, 'section'=>'access')) ?>">
+
+                    <?= $this->icon('unlock-alt','x2 '.($active_buttons['access'] ? 'active' : '')) ?><br>
+                Accès appli</a>
+            </div>
+            <div class="col-md-2 text-center submenu <?= $active_buttons['admin-account'] ? 'active' : '' ?> <?= $section == 'admin-account' ? 'current' : '' ?>">
+                <a href="#" data-ajax="<?= $this->url('superadmin-widget-account', array('id'=>$client->id, 'section'=>'admin-account')) ?>">
+
+                    <?= $this->icon('user','x2 '.($active_buttons['admin-account'] ? 'active' : '')) ?><br>
+                Compte admin</a>
+            </div>
+            <div class="col-md-2 text-center submenu <?= $active_buttons['trial'] ? 'active' : '' ?> <?= $section == 'trial' ? 'current' : '' ?>">
+                <a href="#" data-ajax="<?= $this->url('superadmin-widget-account', array('id'=>$client->id, 'section'=>'trial')) ?>">
+
+                    <?= $this->icon('ticket','x2 '.($active_buttons['trial'] ? 'active' : '')) ?><br>
+                Période essai</a>
+            </div>
+
+
+        </div>
+
+        <div id="account-ajax-container">
+
+        <?php if ($section == 'dossier') : ?>
+            
+            <h2>Dossier</h2>
+            <hr>
+            <div class="col-xs-1"><?= $this->tooltip ('Dossier', 'top', $this->icon('folder-open','','#555')) ?></div>
+            <div class="col-xs-11">
+
+            <table class="listing">
+                <tr><td style="width:160px;">Enregistré le</td><td><?= \Core\Tools::convert_date($client->date_create) ?></td></tr>
+            </table>
+
+            </div>
+            
+            <div class="clear"></div>
+            <br>
+
+            <div class="col-xs-1"><?= $this->tooltip ('Commentaire', 'top', $this->icon('comment','','#555')) ?></div>
+            <div class="col-xs-11" id="comment_box" data-save-url="<?= $this->url('superadmin-json-save_comment', array('id'=>$client->id)) ?>"><?= nl2br($client->comment) ?>
+            </div>
+            <div class"row" id="comment-link">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-11"><a href="#"><?= $client->comment ? 'Modifier le ' : 'Ajouter un ' ?> commentaire</a></div>
+            </div>
+
+            <div class="clear"></div>
+            <br><br>
+
+            <?php if (!$this->is_commercial() && !$this->is_support()) : ?>
+
+            <div style="text-align:center;">
+                <?php if (!$client->stop_contact) : ?>
+                    <a href="#" data-ajax-callback="stop_contact_callback" data-ajax-json="<?= $this->url('superadmin-json-clients', array('id'=>$client->id, 'action'=>'stop-contact')); ?>" class="button inverse">Ne plus contacter</a>
+                <?php else : ?>
+                    <a href="#" data-ajax-callback="cancel_stop_contact_callback" data-ajax-json="<?= $this->url('superadmin-json-clients', array('id'=>$client->id, 'action'=>'cancel-stop-contact')); ?>" class="button inverse">Annuler ne plus contacter</a> 
+                <?php endif; ?>
+                &nbsp;&nbsp;
+            </div>
+
+            <?php endif; ?>
+
+        <?php elseif ($section == 'param') : ?>
+
+            <h2>Paramétrage automatique</h2>
+            <hr>
+            <?php if (!$auto_params) : ?>
+
+                <br><div class="text-center">
+                <a href="#" data-ajax="<?= $this->url('superadmin-widget-account', array('id'=>$client->id, 'section'=>'param', 'action'=>'launch')) ?>" class="button inverse">Lancer le paramétrage automatique</a>
+                </div><br>
+                <div class="errors">
+                    <?php if (!empty($errors)) : ?>
+                        Erreurs : <br><br>
+                    <?php endif; ?>
+                    <ul>
+                    <?php foreach ($errors as $error) : ?>
+                        <li><?= $error ?></li>
+                    <?php endforeach; ?>
+                    </ul>
+                </div>
+
+            <?php else : ?>
+                <br><div class="text-center">
+                    Le paramétrage automatique a bien été effectué
+                </div><br>
+
+            <?php endif; ?>
+
+        <?php elseif ($section == 'access') : ?>
+
+            <h2>Accès à l'application</h2>
+            <hr>
+            <br><div class="text-center">
+            <a href="#" data-ajax="<?= $this->url('superadmin-widget-account', array('id'=>$client->id, 'section'=>'access', 'action'=>0)) ?>" class="button <?= $access_admin == 0 ? '' : 'inverse' ?>">Automatique</a> 
+            <a href="#" data-ajax="<?= $this->url('superadmin-widget-account', array('id'=>$client->id, 'section'=>'access', 'action'=>1)) ?>" class="button <?= $access_admin == 1 ? '' : 'inverse' ?>">Forcer ouverture</a> 
+            <a href="#" data-ajax="<?= $this->url('superadmin-widget-account', array('id'=>$client->id, 'section'=>'access', 'action'=>2)) ?>" class="button <?= $access_admin == 2 ? '' : 'inverse' ?>">Forcer fermeture</a> 
+            </div>
+            <br> 
+
+        <?php elseif ($section == 'admin-account') : ?>
+
+            <div id="create_new_admin">
+                
+                <h2>Créer un compte admin</h2>
+                <hr>
+                <?= $nb_admins; ?> compte(s) actuellement
+                <br><br>
+                <?= $form->draw() ?>  
+                
+                <div class="text-center">
+                <span class="bold">Mots de passe suggérés (générés aléatoirement) : </span><br><?= $random_password1; ?><br><?= $random_password2; ?><br><?= $random_password3; ?>
+                </div>
+            </div>
+
+        <?php elseif ($section == 'trial') : ?>
+
+            <h2>Période d'essai</h2>
+            <hr>
+
+            <?php if ($active_buttons['param'] && $active_buttons['admin-account']) : ?>
+
+            <?= $form_trial->draw() ?>
+            
+            <?php else : ?>
+            Avant de lancer la période d'essai, le paramètrage automatique doit être effectué et un compte admin créé.
+            <?php endif; ?>
+
+        <?php endif; ?>
+
+        </div>
+
+        <script>
+
+            <?php if ($update_status) : ?>
+                update_status (<?= $client->id ?>);
+            <?php endif; ?>
+
+            $('#comment-link a').on('click', function(event){
+                
+                    event.preventDefault();
+
+                    $('#comment-link').css('display','none');
+
+                    var $container = $('#comment_box');
+
+                    var text = $container.html();
+                    text = $.trim($.br2nl(text));
+                    var url = $container.data('save-url');
+
+                    $container.empty().append('<textarea style="width:100%; height:120px;">'+text+'</textarea><input type="submit" style="width:100%;" value="Enregistrer" />');
+                    
+                    var $textarea = $container.find('textarea');
+                    var $submit = $container.find('input');
+                    $textarea.focus();
+                    
+                    $submit.on("click", function(event){
+                        
+                        event.preventDefault();
+                        
+                        $.ajax({
+                            url : url,
+                            type : 'POST',
+                            data: {comment:$textarea.val()},
+                            dataType : 'json',
+                            success : function(data) {
+                                if (data.success) {
+                                    var value = $textarea.val();
+                                    value = $.nl2br(value);
+                                    $container.empty().append(value);
+                                    comment_box_focused = false;
+                                    var link_text = value == '' ? 'Ajouter un commentaire' : 'Modifier le commentaire';
+                                    $('#comment-link a').empty().append(link_text);
+                                    $('#comment-link').css('display','block');
+                                    flash_messenger('Le commentaire a bien été enregistré','success');
+                                } else {
+                                    flash_messenger('Erreur lors de la mise à jour du commentaire','error');
+                                }
+                            },
+                            error : function(data, state){
+                               flash_messenger('Erreur lors de la mise à jour du commentaire','error');
+                            },
+                        });
+                    });
+                
+                
+            });
+        </script>
+
+        <div class="clear"></div>
+        <br><br>
+

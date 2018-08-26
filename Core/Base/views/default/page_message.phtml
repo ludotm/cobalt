@@ -1,0 +1,21 @@
+<?php
+	switch ($type_msg) {
+		case 'success': $icon = 'check-circle-o'; break;
+		case 'warning': $icon = 'warning'; break;
+		case 'error': $icon = 'times-circle-o'; break;
+		default: $icon = 'cog'; break;
+	}
+?>
+
+<?= $this->icon($icon, '', '#CCC', 'font-size:120px') ?>
+
+<div class="msg"><?= $msg ?></div>
+
+
+ 
+
+
+
+
+
+

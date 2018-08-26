@@ -1,0 +1,110 @@
+
+    <?php if ($action == 'list') : ?>
+
+        <section>
+
+            <a href="<?= $url ?>?action=form" id="add-client" class="button pull-right inverse"><?= $this->icon('wifi') ?>  Ajouter une borne</a> 
+
+            <h2>Liste des bornes</h2>
+
+            <div class="col-lg-12 table-responsive">
+                <?= $table->draw() ?>
+            </div>
+
+        </section>
+
+        <script>
+
+            function add_zero(int) {
+                if (int>=10) {
+                    return int;
+                } else {
+                    return '0'+int;
+                }
+            }
+
+            $('a[data-test]').click(function(event){
+
+                event.preventDefault();
+
+                var url = $(this).data('test');
+                var mac = $(this).data('mac');
+                var secret = $(this).data('secret');
+
+                var today = new Date();
+                var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+                var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+                var last_seen = days[today.getDay()]+' '+months[today.getMonth()]+' '+today.getDate()+' '+add_zero(today.getHours())+':'+add_zero(today.getMinutes())+':'+add_zero(today.getSeconds())+'.'+today.getMilliseconds()+' UTC '+today.getFullYear();
+                //model : Wed Oct 14 15:20:21.854 UTC 2015
+
+                var data = {};
+                data.is_test = 1;
+                data.data = '{"version":"1.0","secret":"'+secret+'","probing":[{"ap_mac":"'+mac+'","rssi":"53","is_associated":"true","client_mac":"8c:00:6d:5c:37:8f","last_seen":"'+last_seen+'"},{"ap_mac":"'+mac+'","rssi":"15","is_associated":"false","client_mac":"b8:03:05:40:b9:b0","last_seen":"'+last_seen+'"},{"ap_mac":"'+mac+'","rssi":"53","is_associated":"true","client_mac":"24:a0:74:eb:99:ac","last_seen":"'+last_seen+'"}]}';
+
+                $.ajax({
+                  type: "POST",
+                  url: url,
+                  data: data,
+                  success: function(response){
+                    $('#modal .modal-body').html(response);
+                  },
+                });
+
+            });
+
+        </script>
+
+    <?php elseif ($action == 'view') : ?>
+
+        <section>
+
+            <a href="<?= $url ?>?action=list" class="return-arrow" style="position:absolute; right:0px; top:0px;">
+                <?= $this->icon('arrow-left') ?>
+            </a>
+
+            <h2><?= $hotspot->name ?> ( ID <?= $hotspot->id ?> )</h2>
+
+            <table border="0" cellpadding="10">
+            	<tr>
+            		<td width="150"><b>Mac</b></td>
+            		<td><?= $hotspot->mac ?></td>
+            	</tr>
+            	<tr>
+            		<td><b>Validateur</b></td>
+            		<td><?= $hotspot->validator ?></td>
+            	</tr>
+            	<tr>
+            		<td><b>Secret</b></td>
+            		<td><?= $hotspot->secret ?></td>
+            	</tr>
+            	<tr>
+            		<td><b>Date de création</b></td>
+            		<td><?= \Core\Tools::convert_date($hotspot->date_create) ?></td>
+            	</tr>
+            </table>
+
+        </section>
+
+
+    <?php elseif ($action == 'form') : ?>
+
+        <section>
+
+            <a href="<?= $url ?>?action=list" class="return-arrow" style="position:absolute; right:0px; top:0px;">
+                <?= $this->icon('arrow-left') ?>
+            </a>
+
+            <h2><?= !$form->get('id')->value ? 'Ajouter' : 'Modifier' ?> une borne</h2>
+
+             <?= $form->draw(); ?>
+
+            <div class="clear"></div>
+
+        </section>
+
+    <?php endif; ?>
+
+
+
+
+

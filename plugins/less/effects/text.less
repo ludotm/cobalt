@@ -1,0 +1,124 @@
+
+/*  TEXTE
+*****************************************************/
+.text-shadow (@color:fade(black,60%), @dist:0px, @blur:4px ) {
+  text-shadow: @dist @dist @blur @color;
+}
+
+.text-relief (@color:fade(black,40%)) {
+  text-shadow: 1px 1px 0 @color;
+}
+.text-black-incruste (@color:fade(white,30%)) {
+  text-shadow: 1px 1px 0 @color;
+}
+.text-white-incruste (@color:fade(black,30%)) {
+  text-shadow: -1px -1px 0 @color;
+} 
+
+.text-truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.text-truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-liner (@color, @grossi, @decalage, @type:solid)  {
+
+  position:relative;
+  width: 100%;
+
+  &:after {
+      content: " ";
+      width: 100%;
+      position: absolute;
+      margin-left: 10px;
+      height: 0px;
+      top: @decalage;
+      border-bottom: @grossi @type @color;
+  }
+}
+
+.text-vintage (@color: #707070, @bg-color: #eee, @size:1px) {
+    color: @color;
+    text-shadow: @size @size 0px  @bg-color, @size*2 @size*2 0px @color;
+}
+
+.text-neon (@color: @fuschia, @size:8px) {
+    
+    text-shadow: 
+    0 0 @size #fff, 
+    0 0 (@size*2) @color, 
+    0 0 (@size*3) @color;
+}
+
+.text-blur(@color: white, @size:5px) {
+  color: transparent;
+   text-shadow: 0 0 @size fade(@color, 50%);
+}
+
+.text-inset (@shadow:black, @light:#555, @size:1px) {
+
+  text-shadow: 
+  @size @size 0px @light,
+  @size 0px 0px @light,
+  0px @size 0px @light,
+  @size -@size 0px @shadow,
+  -@size 0px 0px @shadow,
+  -@size -@size 0px @shadow;
+}
+
+.text-3D (@color:#BBB, @index:4, @base-shadow:2px) when (@index > 0) {
+
+  @base:1px;
+  @base-blur:3px;
+  @base-opacity:0.07;
+  
+  .text-3D(@color, @index - 1,  @base-shadow);
+
+  text-shadow+: 0  @base*@index 0 @color; //ligten(@color,4%);
+  text-shadow+: 0  @base-shadow*@index @base-blur*@index rgba(0,0,0,@base-opacity*@index); 
+}
+
+.text-3D-iso (@shadow-color:@dark-blue, @index:3,  @base-shadow:2px ) when (@index > 0) {
+   
+  @base:1px;
+  @base-blur:@base-shadow + 1;
+  @base-opacity:0.07;
+  
+  .text-3D-iso (@shadow-color, @index - 1,  @base-shadow);
+  
+  text-shadow+: @base*@index @base*@index 0 @shadow-color;
+  text-shadow+: @base-shadow*@index  @base-shadow*@index @base-blur*@index rgba(0,0,0,@base-opacity*@index); 
+}
+
+.text-japan (@shadow-color:@dark-blue, @size:2px ) {
+   
+  text-shadow:       
+        -@size -@size 0 @shadow-color,
+        -@size @size 0 @shadow-color,
+        @size @size 0 @shadow-color,
+        @size -@size 0 @shadow-color,
+
+        -@size (@size*2.5) 0 @shadow-color,
+        @size (@size*2.5) 0 @shadow-color,
+
+               0 0 5px rgba(0,0,0,.1),
+               0 1px 3px rgba(0,0,0,.3),
+               0 3px 5px rgba(0,0,0,.2),
+               0 5px 8px rgba(0,0,0,.35);
+}
+
+.text-contour (@shadow-color:@dark-blue, @size:2px ) {
+   
+  text-shadow:       
+        -@size -@size 0 @shadow-color,
+        -@size @size 0 @shadow-color,
+        @size @size 0 @shadow-color,
+        @size -@size 0 @shadow-color;
+}

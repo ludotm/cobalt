@@ -1,0 +1,22 @@
+
+<style>@import url('/<?= $this->request->zone ?>/css/error.css');</style>
+
+<div id="error-page">
+    <div id="error-background">
+        <section id="error-section">
+
+                <div id="error-container">
+
+			        <span class="error-code"><?= $this->icon('cog', 'lg') ?> <?= $code ?></span> 
+			 		<br>
+			 		<?= translate('Erreur') ?> <?= $code ?> : <?= $message ?>
+			 		<br> <br> 
+			 		&raquo; <?= translate('Retour à la page d\'accueil') ?> : <a href="http://<?= DOMAIN ?>"><?= DOMAIN ?></a>
+
+			    </div>
+
+                <div class="clear"></div>
+        </section>
+    </div>
+</div>
+

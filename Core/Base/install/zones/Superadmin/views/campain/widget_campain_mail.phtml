@@ -1,0 +1,129 @@
+
+
+    <?php if ($action == 'list') : ?>
+
+        <section>
+
+            <div class="row table-control">
+
+                <div class="col-sm-6">
+                    <h2>Liste des campagnes mail</h2>
+                </div>
+
+                <div id="update_status" data-update-url="<?= $this->url('superadmin-json-get_status'); ?>"></div>
+
+                <div class="col-sm-6" style="padding-top:10px;">
+                    <a href="#" id="add-campain" data-ajax="<?= $this->url('superadmin-widget-campain_mail', array('action'=>'form')) ?>" data-transition="slide-left" class="button inverse"><?= $this->icon('envelope') ?>  Nouvelle campagne mail</a>
+                </div>
+
+            </div>
+
+            <div class="table-responsive">
+                <?= $table->draw() ?>
+            </div>
+
+        </section>
+    
+    <?php elseif ($action == 'form') : ?>
+
+        <section>
+
+            <a href="#" class="return-arrow" data-ajax="<?= $this->url('superadmin-widget-campain_mail', array('action' => 'list')) ?>" data-transition="slide-right" style="position:absolute; top:-130px; right:15px;">
+                <?= $this->icon('arrow-left') ?><!--arrow-circle-o-left-->
+            </a>
+
+            <h2><?= !$form->get('id')->value ? 'Ajouter' : 'Modifier' ?> une campagne mail</h2>
+
+            <?= $form->draw('1000px'); ?>
+
+            <style>
+            <?= $editor_css; ?>
+            </style>
+    
+        </section>
+
+    <?php elseif ($action == 'view') : ?>
+
+        <section data-campain-id="<?= $campain->id ?>" data-campain-type="<?= $type ?>">
+
+            <div id="popup_status" class="<?= $status['color'] ?>">
+                <?= $this->icon('envelope', 'x2'); ?><br>
+                <span><?= $status['label'] ?></span>
+            </div>
+            
+            <h2 style="margin-top:0;"><?= $campain->campain_title ?></h2>
+
+            <hr class="clear">
+
+            <div id="timeline">
+                <span class="bg-line"></span>
+                <span class="bullet-text" style="left:-40px;">Template</span>
+                <span class="bullet-text" style="left:127px;">Ciblage</span>
+                <span class="bullet-text" style="right:125px;">Contenu</span>
+                <span class="bullet-text" style="right:-40px;">Envoi</span>
+
+                <span class="bullet<?= $status['template'] ? ' active' : '' ?> bullet1" style="left:0%;"></span>
+                <span class="bullet<?= $status['target'] ? ' active' : '' ?> bullet2" style="left:31%;"></span>
+                <span class="bullet<?= $status['content'] ? ' active' : '' ?> bullet3" style="right:31%;"></span>
+                <span class="bullet<?= $status['sent'] == 2 || $status['sent'] == 3 ? ' active' : ($status['sent'] == 1 ? ' current' : '') ?> bullet4" style="right:0;"></span>
+            </div>
+
+            <div id="tabs-client">
+                <ul class="nav nav-tabs">
+                    <li<?= $active_tab == 'A' ? ' class="active"' : '' ?>><a data-toggle="tab" href="#sectionA">Template</a></li>
+                    <li<?= $active_tab == 'B' ? ' class="active"' : '' ?>><a data-toggle="tab" href="#sectionB">Ciblage</a></li>
+                    <li<?= $active_tab == 'C' ? ' class="active"' : '' ?>><a data-toggle="tab" href="#sectionC">Contenu</a></li>
+                    <li<?= $active_tab == 'D' ? ' class="active"' : '' ?>><a data-toggle="tab" href="#sectionD" onCLick="javascript:refresh_render_tab();">Aperçu</a></li>
+                    <li<?= $active_tab == 'E' ? ' class="active"' : '' ?>><a data-toggle="tab" href="#sectionE" onCLick="javascript:refresh_send_tab();">Envoi</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="sectionA" class="tab-pane fade <?= $active_tab == 'A' ? ' in active' : '' ?>">
+                        
+                        <!-- TEMPLATE -->
+                        <div id="ajax_container_template" data-ajax-container="<?= $this->url('superadmin-widget-select_template', array('id'=> $campain->id)) ?>">
+                            <?= $this->widget('select_template'); ?>
+                        </div>
+                        
+
+                    </div>
+                    <div id="sectionB" class="tab-pane fade <?= $active_tab == 'B' ? ' in active' : '' ?>">
+                        
+                        <!-- CIBLAGE -->
+                        <div id="ajax_container_target_campain" data-ajax-container="<?= $this->url('superadmin-widget-target_campain', array('id'=> $campain->id, 'type'=>$type)) ?>">
+                            <?= $this->widget('target_campain', array('id'=> $campain->id, 'type'=>$type)); ?>
+                        </div>
+
+                    </div>
+                    <div id="sectionC" class="tab-pane fade <?= $active_tab == 'C' ? ' in active' : '' ?>">
+                        
+                        <!-- CONTENU -->
+                        <div id="ajax_container_content" data-ajax-container="<?= $this->url('superadmin-widget-campain_content_mail', array('id'=> $campain->id)) ?>">
+                            <?= $this->widget('campain_content_mail'); ?>
+                        </div>
+
+                    </div>
+                    
+                    <div id="sectionD" class="tab-pane fade <?= $active_tab == 'D' ? ' in active' : '' ?>">
+                        
+                        <!-- APERCU -->
+                        <div id="ajax_container_render_mail" data-ajax-container="<?= $this->url('superadmin-widget-render_mail', array('id'=> $campain->id)) ?>">
+                            <?= $this->widget('render_mail'); ?>
+                        </div>
+
+                    </div>
+
+                    <div id="sectionE" class="tab-pane fade <?= $active_tab == 'E' ? ' in active' : '' ?>">
+
+                        <!-- ENVOI -->
+                         <div id="ajax_container_send_campain" data-ajax-container="<?= $this->url('superadmin-widget-launch_campain', array('id'=> $campain->id, 'type'=> $type)) ?>">
+                            <?= $this->widget('launch_campain',array('id'=> $campain->id, 'type'=> $type)); ?>
+                        </div>
+
+                    </div>
+                    
+                </div>
+            </div>
+
+        </section>
+
+    <?php endif; ?>

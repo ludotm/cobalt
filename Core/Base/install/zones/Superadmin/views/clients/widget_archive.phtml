@@ -1,0 +1,22 @@
+    
+    <?php if (true) : ?>
+
+    	<?= $form_archive->draw() ?>
+
+	<?php else : ?>
+
+		Un client abonné ne peut être archivé
+
+	<?php endif; ?>
+
+    <div class="clear"></div>
+	<br><br>
+
+	<div style="text-align:center;">
+	    <?php if (!$client->stop_contact) : ?>
+	        <a href="#" data-ajax-callback="stop_contact_callback" data-ajax-json="<?= $this->url('superadmin-json-clients', array('id'=>$client->id, 'action'=>'stop-contact')); ?>" class="button inverse">Ne plus contacter</a>
+	    <?php else : ?>
+	        <a href="#" data-ajax-callback="cancel_stop_contact_callback" data-ajax-json="<?= $this->url('superadmin-json-clients', array('id'=>$client->id, 'action'=>'cancel-stop-contact')); ?>" class="button inverse">Annuler ne plus contacter</a> 
+	    <?php endif; ?>
+	    &nbsp;&nbsp;
+	</div>

@@ -1,0 +1,31 @@
+    <br>
+    <h2>Permissions des utilisateurs</h2>
+<br>
+    <section id="permissions-form-container">
+
+        <div id="form-rank-container">
+            <?= $form_rank->draw() ?>
+        </div>
+
+        <br><br>
+
+        <?php 
+            if ($id_rank) {
+                echo $form->draw('650px');
+            }
+        ?>
+    
+    </section>
+
+    <script>
+    $(document).ready(function(){
+
+        $('#rank_form select').change(function(){
+
+            if ($(this).find(":selected").val() != '' ) {
+                $('#rank_form').submit();
+            }
+        });
+  
+    });
+    </script>

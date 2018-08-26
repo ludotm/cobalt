@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap-responsive.min.css">
+
+
+
+
+        
+        <link rel="stylesheet/less" type="text/css" href="framework.less">
+        <script src="less.min.js" type="text/javascript"></script>
+
+
+
+
+        <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+        
+    </head> 
+    <body>
+
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+
+
+        <h1>DOCUMENTATION FRAMEWORK LESS</h1>
+
+        <style>
+        h1 {
+            font-family: 'Oswald', sans-serif;
+        }
+        table td {
+            padding:30px;
+        }
+        td.desc {
+            width:300px;
+        }
+        #menu div.item {
+            float: left;
+            margin-left: 1px;
+            background-color: orange;
+            color: white;
+            padding:15px;
+            cursor:hand;
+            cursor: pointer;
+        }
+        #menu div.item:hover, #menu div.active {
+            background-color: #ed6307;
+        }
+        #container div.section {
+            clear: both;
+            background-color: rgba(255,255,255,0.7);
+            width: 90%;
+            padding:15px;
+            position:relative;
+            z-index: 0;
+        }
+      
+        </style>
+        <script>
+
+        jQuery( 'document' ).ready(function() {
+ 
+            $('#menu div.item').click(function(){
+
+                $('#menu div.item').each(function(){
+                    $(this).removeClass('active');
+                });
+
+                $(this).addClass('active');
+
+                $('#container div.section').each(function(){
+                    $(this).hide();
+                });
+
+                var section = $(this).attr('data-section');
+
+                $('#container div.section').each(function(){
+                    if ($(this).attr('data-section') == section) {
+                        $(this).show();
+                    }
+                });                
+            });
+        });    
+        </script>
+
+        <div id="menu">
+            <div class="item" data-section="base">Base</div>
+            <div class="item" data-section="gradients">Gradients</div>
+            <div class="item" data-section="shapes">Shapes</div>
+            <div class="item" data-section="box-shadows">Box Shadows</div>
+            <div class="item" data-section="buttons">Buttons</div>
+            <div class="item" data-section="texts">Texts / HR</div>
+            <div class="item" data-section="menus">Menus</div>
+            <div class="item" data-section="forms">Forms</div>
+            <div class="item" data-section="images">Images/Block effects</div>
+            <div class="item" data-section="animation">Animations</div>
+            <div class="item" data-section="masks">Masks</div>
+        </div>
+
+
+        <div id="container">
+
+        <div class='section' data-section="base">
+        <h1>BASE</h1>
+
+        <table width="100%" border="0">
+            <tr>
+                <td class="desc">
+                    Rounded
+                </td>
+                <td class="exemple">
+                    <div class="test5 test-bg">qsd</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+
+                </td>
+                <td class="exemple">
+                    <div class="text-box">Mon texte</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    animation hover
+                </td>
+                <td class="exemple">
+                    <div class="test">qsd</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Inner Shadow 
+                </td>
+                <td class="exemple">
+                    <div class="f-inner-shadow"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Inner light 
+                </td>
+                <td class="exemple">
+                    <div class="f-inner-light"></div>
+                </td>
+            </tr>
+             <tr>
+                <td class="desc">
+                    Drop Shadow 
+                </td>
+                <td class="exemple">
+                    <div class="f-drop-shadow"></div>
+                </td>
+            </tr>
+        </table>
+
+        </div>
+        <div class='section' data-section="gradients">
+        <h1>GRADIENTS</h1>
+        
+        <table width="100%" border="0">
+            <tr>
+                <td class="desc">
+                    Box shadow
+                </td>
+                <td class="exemple">
+                    <div class="f-box-shadow"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Gradient Transition
+                </td>
+                <td class="exemple">
+                    <div class="f-gradient-transition"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Radial Gradient Transition
+                </td>
+                <td class="exemple">
+                    <div class="f-radial-gradient-transition"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Crystal Gradient 1
+                </td>
+                <td class="exemple">
+                    <div class="f-crystal-gradient-1"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Crystal Gradient 2
+                </td>
+                <td class="exemple">
+                    <div class="f-crystal-gradient-2"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Crystal Gradient 3
+                </td>
+                <td class="exemple">
+                    <div class="f-crystal-gradient-3"></div>
+                </td>
+            </tr>
+        </table>
+
+
+        </div>
+        <div class='section' data-section="box-shadows">
+        <h1>BOX SHADOWS</h1>
+        
+        <table width="100%" border="0">
+
+            <tr>
+                <td class="desc">
+                    Shadow cube
+                </td>
+                <td class="exemple">
+                    <div class="f-shadow-cube"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Shadow cube inverse
+                </td>
+                <td class="exemple">
+                    <div class="f-shadow-cube-inverse"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Shadow block
+                </td>
+                <td class="exemple">
+                    <div class="f-shadow-block"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Shadow extrapol
+                </td>
+                <td class="exemple">
+                    <div class="f-shadow-extrapol"></div>
+                    <br><br><br><br><br><br>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Shadow deco
+                </td>
+                <td class="exemple">
+                    <div class="f-shadow-deco"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Shadow HR
+                </td>
+                <td class="exemple">
+                    <div class="f-shadow-hr"><div></div></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="desc">
+                    Shadow bulge
+                </td>
+                <td class="exemple">
+                    <div class="f-shadow-bulge"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Shadow dogear
+                </td>
+                <td class="exemple">
+                    <div class="f-shadow-dogear"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Shadow dogear right
+                </td>
+                <td class="exemple">
+                    <div class="f-shadow-dogear-right"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Shadow float
+                </td>
+                <td class="exemple">
+                    <div class="f-shadow-float"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Shadow cast
+                </td>
+                <td class="exemple">
+                    <div class="f-shadow-cast"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Shadow fore
+                </td>
+                <td class="exemple">
+                    <div class="f-shadow-fore"></div>
+                </td>
+            </tr>
+
+        </table>
+
+
+        </div>
+        <div class='section' data-section="shapes">
+        <h1>SHAPES</h1>
+        
+        <table width="100%" border="0">
+            <tr>
+                <td class="desc">
+                    Circle
+                </td>
+                <td class="exemple">
+                    <div class="f-circle"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Ovale
+                </td>
+                <td class="exemple">
+                    <div class="f-ovale"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Square
+                </td>
+                <td class="exemple">
+                    <div class="f-square"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Triangles top, bottom, left, right
+                </td>
+                <td class="exemple">
+                    <div class="f-triangle-top"></div><br>
+                    <div class="f-triangle-bottom"></div>
+                    <div class="f-triangle-left"></div>
+                    <div class="f-triangle-right"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    bubble top, bottom, left, right
+                </td>
+                <td class="exemple">
+                    <div class="f-bubble-top">qsd qsdqsd qsdqsd qsd qsdq sdqs dqsd qsdq s sq</div><br>
+                    <div class="f-bubble-bottom">qsd qsdqsd qsdqsd qsd qsdq sdqs dqsd qsdq s sq</div><br>
+                    <div class="f-bubble-left">qsd qsdqsd qsdqsd qsd qsdq sdqs dqsd qsdq s sq</div><br>
+                    <div class="f-bubble-right">qsd qsdqsd qsdqsd qsd qsdq sdqs dqsd qsdq s sq</div><br>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Losange
+                </td>
+                <td class="exemple">
+                    <div class="f-losange"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Pentagon
+                </td>
+                <td class="exemple">
+                    <br><br>
+                    <div class="f-pentagon"></div>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Hexagon
+                </td>
+                <td class="exemple">
+                    <br><br>
+                    <div class="f-hexagon">TEXT</div>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Diamond
+                </td>
+                <td class="exemple">
+                    <div class="f-diamond"></div>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Heart
+                </td>
+                <td class="exemple">
+                    <div class="f-heart"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Star-5
+                </td>
+                <td class="exemple">
+                    <div class="f-star-5"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Round-star-label
+                </td>
+                <td class="exemple">
+                    <div class="f-round-star-label"><br>TEXT</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Ribbon
+                </td>
+                <td class="exemple">
+                    <div class="f-ribbon"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Chevron arrow vertical
+                </td>
+                <td class="exemple">
+                    <div class="f-chevron-arrow-vertical"><br>TEXT</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Chevron vertical
+                </td>
+                <td class="exemple">
+                    <div class="f-chevron-vertical"><br>TEXT</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Chevron arrow horizontal
+                </td>
+                <td class="exemple">
+                    <div class="f-chevron-arrow-horizontal"><br>TEXT</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Chevron horizontal
+                </td>
+                <td class="exemple">
+                    <div class="f-chevron-horizontal"><br>TEXT</div>
+                </td>
+            </tr>
+        </table>
+
+
+        </div>
+        <div class='section' data-section="buttons">
+        <h1>BUTTONS</h1>
+        
+        <table width="100%" border="0">
+            <tr>
+                <td class="desc">
+                    bouton relief
+                </td>
+                <td class="exemple">
+                    <div class="f-bouton-relief">qsd</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Boutonfutura
+                </td>
+                <td class="exemple">
+                    <div class="f-button-futura"><div>qsd</div></div>
+                </td>
+            </tr>
+        </table>
+
+
+        </div>
+        <div class='section' data-section="texts">
+        <h1>TEXTS / ARTICLES / HR</h1>
+        
+        <table width="100%" border="0">
+            <tr>
+                <td class="desc">
+                    Text shadow
+                </td>
+                <td class="exemple">
+                    <div class="f-text-shadow">Text</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Text relief
+                </td>
+                <td class="exemple">
+                    <div class="f-text-relief">Text</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Text black incruste
+                </td>
+                <td class="exemple">
+                    <div class="f-text-black-incruste">Text</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Text white incruste
+                </td>
+                <td class="exemple">
+                    <div class="f-text-white-incruste">Text</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc" width="300">
+                    Texte avec liner en fond
+                </td>
+                <td>
+                    <div class="f-text-liner">Liner title</div>
+                    <div class="f-text-liner2">Liner title</div>
+                    <div class="f-text-liner3">Liner title</div>
+                    <div class="f-text-liner4">Liner title</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Text vintage
+                </td>
+                <td class="exemple">
+                    <div class="f-text-vintage">Text</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Text néon
+                </td>
+                <td class="exemple">
+                    <div class="f-text-neon">Text</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Text blur
+                </td>
+                <td class="exemple">
+                    <div class="f-text-blur">Text</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Text inset
+                </td>
+                <td class="exemple">
+                    <div class="f-text-inset">Text</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Text 3D
+                </td>
+                <td class="exemple">
+                    <div class="f-text-3D">Text</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Text 3D iso
+                </td>
+                <td class="exemple">
+                    <div class="f-text-3D-iso">Text</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Text contour
+                </td>
+                <td class="exemple">
+                    <div class="f-text-contour">Text</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Text japan
+                </td>
+                <td class="exemple">
+                    <div class="f-text-japan">Text</div>
+                </td>
+            </tr>
+            
+
+            <tr>
+                <td class="desc">
+                    Truncate
+                </td>
+                <td class="exemple">
+
+                    <div class="test3 debug-red test-bg">qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                            qsd <a href="">qksjhd kqjsh</a> dkjqsh dkjqhs dkqh skdhq skjh qsd
+                        qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Article colonnes
+                </td>
+                <td class="exemple">
+                    <div class="site-content" style="width:300px; height:100px;">qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                        qsd <a href="">qksjhd kqjsh</a> dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsd qksjhd kqjsh dkjqsh dkjqhs dkqh skdhq skjh qsd
+                    qsdqsd qsd qsd qsd
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    HR fade
+                </td>
+                <td class="exemple">
+                    <hr class="fade">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="desc">
+                    HR dot
+                </td>
+                <td class="exemple">
+                    <hr class="dot">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="desc">
+                    HR glyph
+                </td>
+                <td class="exemple">
+                    <hr class="glyph">
+                </td>
+            </tr>
+        </table>
+
+
+        </div>
+        <div class='section' data-section="menus">
+        <h1>MENUS</h1>
+        
+        <table width="100%" border="0">
+
+        </table>
+
+        </div>
+        <div class='section' data-section="forms">
+        <h1>FOMS</h1>
+
+
+        <table width="100%" border="0">
+
+        </table>
+
+
+        </div>
+        <div class='section' data-section="images">
+        <h1>IMAGES / BLOCK EFFECTS</h1>
+
+
+        <table width="100%" border="0">
+            <tr>
+                <td class="desc">
+                    Drop shadow
+                </td>
+                <td class="exemple">
+                    <div class="f-drop-shadow"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Inner shadow
+                </td>
+                <td class="exemple">
+                    <div class="f-inner-shadow"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Vignettage
+                </td>
+                <td class="exemple">
+                    <div class="f-vignettage"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Gloss
+                </td>
+                <td class="exemple">
+                    <div class="f-gloss"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Polaroid
+                </td>
+                <td class="exemple">
+                    <div class="f-polaroid"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="desc">
+                    Multi effects
+                </td>
+                <td class="exemple">
+                    <div class="f-multi-filters"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Saturate
+                </td>
+                <td class="exemple">
+                    <div class="f-saturate"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Brightness
+                </td>
+                <td class="exemple">
+                    <div class="f-brightness"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Hue
+                </td>
+                <td class="exemple">
+                    <div class="f-hue"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Contrast
+                </td>
+                <td class="exemple">
+                    <div class="f-contrast"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Grayscale
+                </td>
+                <td class="exemple">
+                    <div class="f-grayscale"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Blur
+                </td>
+                <td class="exemple">
+                    <div class="f-blur"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Opacity
+                </td>
+                <td class="exemple">
+                    <div class="f-opacity"></div>
+                </td>
+            </tr>
+
+        </table>
+
+
+        </div>
+        <div class='section' data-section="animation">
+        <h1>ANIMATIONS</h1>
+
+
+        <table width="100%" border="0">
+            <tr>
+                <td class="desc">
+                    Rotation
+                </td>
+                <td class="exemple">
+                    <div class="f-rotation"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Scale
+                </td>
+                <td class="exemple">
+                    <div class="f-scale"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Scale X
+                </td>
+                <td class="exemple">
+                    <div class="f-scale-x"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Scale Y
+                </td>
+                <td class="exemple">
+                    <div class="f-scale-y"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Skew
+                </td>
+                <td class="exemple">
+                    <div class="f-skew"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Skew X
+                </td>
+                <td class="exemple">
+                    <div class="f-skew-x"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Skew Y
+                </td>
+                <td class="exemple">
+                    <div class="f-skew-y"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Translation
+                </td>
+                <td class="exemple">
+                    <div class="f-translation"></div>
+                </td>
+            </tr>
+
+            
+            <tr>
+                <td class="desc">
+                    Quick Animation
+                </td>
+                <td class="exemple">
+                    <div class="f-quick-animation"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    One Animation
+                </td>
+                <td class="exemple">
+                    <div class="f-quick-animation"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="desc">
+                    Infinite Animation
+                </td>
+                <td class="exemple">
+                    <div class="f-quick-animation"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="desc">
+                    Rotation infinie avec pause en hover
+                </td>
+                <td class="exemple">
+                    <div class="f-animation-infinite-rotation"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="desc">
+                    Levitation
+                </td>
+                <td class="exemple">
+                    <div class="f-anim-levitation">
+                        <div class="levitation-object"></div>
+                        <div class="levitation-shadow"></div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="desc">
+                    Translation
+                </td>
+                <td class="exemple">
+                    <div class="f-anim-translation">
+                        <div class="elem1">TITRE 1</div>
+                        <div class="elem2">qsd qsdqsdq zeqsdq sdq sdq dqsdq sd qsd qsd qsq sd qs d</div>
+                        <div class="elem3">TITRE 2</div>
+                        <div class="elem4">qsd qsdqsdq zeqsdq sdq sdq dqsdq sd qsd qsd qsq sd qs d</div>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="desc">
+                    Blur opacity
+                </td>
+                <td class="exemple">
+                    <div class="f-anim-blur-opacity">
+                        TITRE 1
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="desc">
+                    Explode contours hover
+                </td>
+                <td class="exemple">
+                    <div class="f-anim-explode-contours"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="desc">
+                    Anim cube block
+                </td>
+                <td class="exemple" height="250">
+                    <div class="f-anim-cube-block">
+                        qsdqs dqsd qkjshdq ksjhd qkjs qkjs dkjqshd qksh qksh d
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="desc">
+                    Anim cube
+                </td>
+                <td class="exemple" height="250">
+                    <div class="f-anim-cube-container"> 
+                        <div class="f-anim-cube"></div>
+                        <div class="f-anim-cube2"></div>
+                        <div class="f-anim-cube3"></div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="desc">
+                    Flip box
+                </td>
+                <td class="exemple" height="250">
+                    
+                    <div class="f-flip-box">
+                        <div class="flipper">
+                            <div class="front">
+                                FRONT CONTENT
+                            </div>
+                            <div class="back">
+                                BACK CONTENT
+                            </div>
+                        </div>
+                    </div>
+                
+                </td>
+            </tr>
+
+
+
+
+
+            
+
+        </table>
+
+        </div>
+
+</div>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+        
+
+
+        
+
+
+    </body>
+</html>

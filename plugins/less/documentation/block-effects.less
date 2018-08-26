@@ -1,0 +1,42 @@
+
+.vignettage (@color:fade(black, 30%), @position:center, @shape:circle) {
+  position: relative;
+  z-index: -1;
+  &:after {
+    width:100%;
+    height:100%;
+    position:absolute;
+    content:' ';
+    display: block; 
+    top:0;
+    left:0;
+    .radial-gradient(transparent 60%, @color 100%, @position, @shape);
+    z-index: 1;
+  } 
+}
+
+.gloss(){
+
+  position: relative;
+  z-index: 1;
+
+  &:after{
+    width:100%;
+    height:100%;
+    .linear-gradient-multi-top-right(rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50% , rgba(255, 255, 255, 0.2) 75%);
+    position: absolute;
+    display: block; 
+    content: " ";
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+  }
+}
+
+.polaroid (@grossi:10px) {
+  border:@grossi solid white;
+  border-bottom:@grossi*2 solid white;
+  .drop-shadow;
+}

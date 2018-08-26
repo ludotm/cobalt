@@ -1,0 +1,158 @@
+
+    <?php if ($action == 'list') : ?>
+
+        <section>
+            <div id="folders" style="margin-top:-60px;">
+
+                <div id="add-client" style="margin-right:0px;" class="folder-container pull-right" data-ajax="<?= $this->url('superadmin-widget-clients', array('action' => 'form')) ?>" data-transition="slide-left">
+                        <div class="folder-pills maincolor">
+                            <div class="folder-icon" style="top:18px;"><i class='fa fa-user-plus' style="font-size:2.3em;"></i></div>
+                        </div>
+                        <div class="folder-text maincolor">Nouveau</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="row table-control" id="search-filters">
+                
+                <form id="filter-form">
+                
+                    <div class="col-sm-5">
+                        <i class="fa fa-search" style="position:absolute; top:11px; left:26px;"></i>
+                        <input type="text" value="<?= $data['search'] ?>" class="search-text" style="width:100%; padding-left:30px;" placeholder="Rechercher par nom ou ref." />
+                    </div>
+
+                    <div class="col-sm-3">
+                 
+                        <select class="search-order">
+                            <option value=''>Trier par</option>
+                            <option value='first_contact' <?= $data['order'] == 'first_contact' ? 'SELECTED' : '' ?>>Date d'enregistrement</option>
+                            <option value='name' <?= $data['order'] == 'name' ? 'SELECTED' : '' ?>>Nom</option>
+                        </select>
+
+                    </div>
+
+                    <div class="col-sm-3">
+
+                        <select class="search-motif">
+                            <option value=''>Motif</option>
+                            <?php foreach ($motifs as $key => $motif) : ?>
+                                <option value='<?= $key ?>' <?= $data['motif'] == $key ? 'SELECTED' : '' ?>><?= $motif ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    
+                    </div>
+
+                    <div class="col-sm-1">
+                        <a href="#" class="button search-submit" data-ajax="<?= $this->url('superadmin-widget-clients', array('action' => 'list')) ?>" data-data="get_search_filters">Filtrer</a>
+                    </div>
+                
+                <form>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-12 table-responsive">
+
+                    <?= $table->draw() ?>
+
+                </div>
+
+            </div>
+
+           
+
+        </section>
+
+
+    <?php elseif ($action == 'view') : ?>
+
+        <section data-client-id="<?= $client->id ?>">
+            <div class="row" style="width:400px; float:left; height:120px;">
+                <div class="col-md-12" style="margin-bottom:10px;">
+                    <h2 style="margin-top:0; display:inline;"><?= $client->name ?></h2> (Ref. client : <?= $client->id ?>)
+                </div>
+                <div class="col-md-1">
+                    <?= $this->tooltip ('Contact', 'top', $this->icon('user', '','#555')) ?>
+                </div>
+                <div class="col-md-11 bold"><?= $client->contact_prename ?> <?= $client->contact_name ?></div>
+                <div class="col-md-1">
+                    <?= ''//$this->tooltip ('Email', 'top', $this->icon('envelope-o','','#555')) ?>
+                </div>
+                <div class="col-md-11 client-mail <?= $client->stop_contact?'strike':'' ?>"><?= $client->email ?></div>
+                <div class="col-md-1">
+                    <?= ''//$this->tooltip ('Téléphone', 'top', $this->icon('mobile-phone', 'lg','#555')) ?>
+                </div>
+                <div class="col-md-11 client-phone <?= $client->stop_contact?'strike':'' ?>"><?= \Core\Tools::convert_phone($client->mobile) . ($client->mobile!=''&&$client->phone!=''?' - ':'') . \Core\Tools::convert_phone($client->phone) ?></div>
+                
+            </div>
+
+            <div id="popup_status">
+               
+            </div>
+
+            <hr class="clear">
+
+            <div id="tabs-client">
+                <ul class="nav nav-tabs">
+                    <li<?= $active_tab == 'A' ? ' class="active"' : '' ?>><a data-toggle="tab" href="#sectionA">Compte</a></li>
+                    <li<?= $active_tab == 'B' ? ' class="active"' : '' ?>><a data-toggle="tab" href="#sectionB">Archive</a></li>
+                    <li<?= $active_tab == 'E' ? ' class="active"' : '' ?>><a data-toggle="tab" href="#sectionE">Alertes</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="sectionA" class="tab-pane fade <?= $active_tab == 'A' ? ' in active' : '' ?>">
+                        
+                        <!-- COMPTE -->
+                        <div id="ajax_container_account" data-ajax-container="<?= $this->url('superadmin-widget-account', array('id'=> $client->id)) ?>">
+                            <?= $this->widget('account'); ?>
+                        </div>
+
+                    </div>
+                    <div id="sectionB" class="tab-pane fade <?= $active_tab == 'B' ? ' in active' : '' ?>">
+                        
+                        <!-- ARCHIVE -->
+                        <div id="ajax_container_archive" data-ajax-container="<?= $this->url('superadmin-widget-archive', array('id'=> $client->id)) ?>">
+                            <?= $this->widget('archive'); ?>
+                        </div>
+
+                    </div>
+                    <div id="sectionE" class="tab-pane fade <?= $active_tab == 'E' ? ' in active' : '' ?>">
+                        
+                        <!-- ALERTES -->
+                        <div id="ajax_container_alert" data-ajax-container="<?= $this->url('superadmin-widget-alert', array('id'=> $client->id)) ?>">
+                            <?= $this->widget('alert'); ?>
+                        </div>
+
+                    </div>
+
+                    <div id="sectionF" class="tab-pane fade <?= $active_tab == 'F' ? ' in active' : '' ?>">
+                        
+                        <!-- HISTORIQUE -->
+                        <div id="ajax_container_historique" data-ajax-container="<?= $this->url('superadmin-widget-historique', array('id'=> $client->id)) ?>">
+                            <?= $this->widget('historique'); ?>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+
+    <?php elseif ($action == 'form') : ?>
+
+        <section>
+
+            <a href="#" class="return-arrow" data-ajax="return" data-transition="slide-right" style="position:absolute; right:10px; top:30px;">
+                <?= $this->icon('arrow-left') ?>
+            </a>
+
+            <?php $form->attr('class', 'form-horizontal', false); ?>
+            <?= $form->draw(); ?>
+
+        </section>
+
+    <?php endif; ?>
+

@@ -1,0 +1,677 @@
+
+
+
+/* -------------------- BASE -------------------------- */
+
+html {height:100%;}
+
+body {
+	height:100%;
+	min-height:100%;
+	background-color: @background-color;
+	color:@base-text-color;
+}
+
+a:link, a:visited {
+	color:@color2;
+}
+a:active, a:hover {
+	color:lighten(@color2,20%);
+}
+b {
+	font-weight: 500;
+}
+
+label {
+	font-weight: 300;
+}
+h1 {
+	font-size: 50px;
+	color:@light-color;
+	font-weight: 300;
+}
+
+h2 {
+	font-size: 20px;
+	color:@color2;
+	font-weight: 300;
+}
+h3 {
+    font-size: 19px;
+    color: @color2;
+    font-weight: 300;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom:7px;
+    border-bottom:1px solid #DDD;
+}
+	
+/* -------------------- LAYOUT -------------------------- */
+
+header {
+	position:fixed;
+	background-color: @dark-color;
+	width:215px;
+	bottom: 0;
+	top:0;
+	left:0;
+	overflow: auto;
+}
+#logo {
+	width: 100%;
+	text-align: center;
+	padding-top:20px;
+	img {
+		display: inline-block;
+	}
+}
+#main-container {
+	width:100%;
+	padding-left:230px;
+	padding-right:15px;
+	padding-bottom:50px;
+}
+
+/* -------------------- TOP BAR -------------------------- */
+#top-bar {
+	height:40px; 
+	line-height:40px; 
+	padding-left:240px; 
+	background-color:#F7F7F7; 
+	color:gray;
+}
+#menu-top {
+	float:right; 
+	padding-left:10px; 
+	padding-right:10px; 
+
+	.rollover-menu(#CFCFCF, gray, @color2, 40px);
+
+	background-color: #F7F7F7;
+	
+
+	ul {
+		li {
+			a {
+				border-bottom:0px;
+			}
+			&.active > a {
+		      border-bottom:0px;
+		    }
+		    ul {
+		    	li {
+		    		&.active a {
+	                	border-left: 0;
+	              	}
+	              	a:hover {
+	                	border-left:1px solid @color2;
+	                	background-color: #F4F4F4;
+	                	color:@color2;
+	              	}
+	              	i {
+	              		margin-right:10px
+	              	}
+		    	}
+		    }
+		}
+	}
+}
+#menu-top > ul > li {
+	border-left:1px solid #DDD;
+}
+#menu-top > ul > li > a {
+
+	border:0;
+	border-top:1px solid rgba(255,255,255,0);
+	&:hover {
+		border-top:1px solid @color2;
+	}
+}
+
+/* -------------------- MENU -------------------------- */
+
+#menu-header {
+
+	margin-top:15px;
+
+	ul {
+			padding:0;
+			text-decoration: none;
+		}
+
+	li {
+		
+		font-size:18px;
+		.transition(0.3s);
+
+		ul {
+			display:none;
+			padding-bottom:20px;
+
+			li {
+				font-size:16px;
+				color: #aeaeae;
+
+				a {
+					padding:5px;
+					padding-left:35px;
+					padding-bottom: 7px;
+				}
+
+				&.active, &:hover {
+					border-left:0;
+				}
+			}
+		}
+
+		&.active, &:hover {
+			border-left:5px solid @color1;
+			background-color:@dark-color2; 
+
+			ul {
+				display:block;
+				li {
+					a {
+						color: #aeaeae;
+						&:hover {
+							color:@color1;
+						}
+					}
+					&.active a {
+						color:@color1;	
+					}
+				}
+			}
+
+			a {
+				color:@color1;	
+			}
+		}
+		a {
+			display: inline-block;
+			width:100%;
+			padding:17px;
+			color:#a4a9b6;
+
+			i {
+				display: inline-block;
+				width: 22px;
+			}
+		}
+		a:hover {
+			color:@color1;	
+			text-decoration: none;
+		}
+		
+	}	
+} 
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+	background-color: @color1;
+	color: white;
+}
+
+/* -------------------- BUTTON 1, BUTTON 2, BUTON INVERSE, RETURN ARROW -------------------------- */
+
+
+a.button {
+	padding:5px 14px;
+	font-size: 16px;
+	display: inline-block;
+	text-decoration: none;
+	position: relative;
+	z-index: 9;
+	
+	.rounded(50px);
+	border: 2px solid @color2;
+	font-weight:400;
+	color: white;
+	background-color:@color2;
+	
+	&:hover {
+		background-color:white;
+		color: @color2;
+	}
+	
+	&.inactive, &.disabled {
+		border: 2px solid #CCC;
+		cursor:default;
+		color: white;
+		background-color:#CCC;
+	}
+}
+
+a.button.inverse {
+
+	color: @color2;
+	background-color:white;
+	&:hover {
+		background-color:@color2;
+		color: white;
+	}
+	&.inactive, &.disabled {
+		color: #CCC;
+		background-color: white; 
+	}
+}
+
+
+a.button2, input[type="submit"] {
+
+	color: white;
+	background-color: @color2;
+	padding:5px 14px;
+	font-size: 16px;
+	font-weight: 400;
+	border: 0;
+	border-bottom:3px solid darken(@color2, 8%);
+	.rounded(4px);
+	display: inline-block;
+	text-decoration: none;
+	position: relative;
+	z-index: 9;
+	&:hover {
+		background-color:lighten(@color2,7%);
+	}
+	&:active {
+		outline:0;
+	}
+}
+a.button2.inactive, a.button2.disabled, input[type="submit"][disabled] {
+	background-color:lighten(@color2,20%);
+	color:lighten(@color2,30%);
+	border-bottom:3px solid lighten(@color2, 14%);
+	&:hover {
+		background-color:lighten(@color2,20%);
+	}
+}
+
+a.button.button-xxs {padding:2px 4px 2px 4px;font-size:10px;}
+a.button.button-xs {padding:5px 8px 5px 8px;font-size:11px;}
+a.button.button-sm {padding:5px 13px 5px 13px;font-size:14px;}
+a.button.button-xl {padding:12px 24px 12px 24px;font-size:18px;}
+a.button.button-xxl {padding:16px 32px 16px 32px;font-size:26px;}
+
+a.return-arrow {
+	.return-arrow (@color2, 25px);
+}
+
+
+
+
+/* -------------------- FORMULAIRES -------------------------- */
+
+form table td {
+	font-size:16px;
+	vertical-align: middle;
+	padding:10px;
+}
+
+td.form-label {
+	color: @color2;
+	width:150px;
+	font-size: 16px;
+}
+.form-group label {
+	font-size: 16px;
+}
+.form-group {
+	margin-bottom:20px;
+}
+input, select, textarea {
+	
+	padding: 6px 9px;
+	//border:1px solid #AAA;
+	border:1px solid #CCC;
+	//.inner-shadow(0px, 2px, 2px, 0.1);
+	width:350px;
+	font-size:14px;
+	.placeholder(#a8a8a8,italic,300);
+	background-color: #FCFCFC;
+	color:lighten(@base-text-color,10%);
+	//background-color: #FFF;
+	
+}
+input:focus, select:focus, textarea:focus {
+	outline: 1px solid @color2;
+}
+input[type="radio"], input[type="checkbox"] {
+	width: auto;
+}
+label.error {
+	color: red;
+	display: block;
+	width: auto;
+	font-weight: 300;
+	font-size:13px;
+}
+
+
+
+/* -------------------- TABLE -------------------------- */
+
+.table-control {
+	margin-bottom:10px;
+
+	h2 {
+		line-height: 50px;
+		margin:0;
+	}
+
+	a.button {
+		float: right;
+	}
+
+	select {
+		width:100%;
+	}
+}
+.table {
+	width: 100%;
+	margin-bottom: 0;
+
+	thead>tr {
+
+		color:#000;
+		border-bottom:2px solid @color2;
+		background-color: white;
+		font-size: 20px;
+		font-weight: 400;
+		
+		&:hover {
+			//background-color:@color2;
+		}
+	}
+	tr {		
+		.one-transition(background-color, 0.2s);
+		color:@base-text-color;
+		background-color: #f6f6f6;
+		&:nth-child(2n) {
+			background-color: #FFFFFF;
+		}
+		&:hover {
+			background-color:#eeeeee;
+		}
+	}
+
+	td {
+		padding:10px;
+		font-size: 14px;
+		line-height: 18px;
+		vertical-align:middle;
+	}
+}
+
+/* -------------------- PAGNIATION -------------------------- */
+
+.pagination>.active>a, 
+.pagination>.active>a:focus, 
+.pagination>.active>a:hover, 
+.pagination>.active>span, 
+.pagination>.active>span:focus, 
+.pagination>.active>span:hover {
+	background-color: @color2;
+	border-color: @color2;
+}
+.pagination>li>a, 
+.pagination>li>span,
+.pagination>li>a:focus, 
+.pagination>li>a:hover, 
+.pagination>li>span:focus, 
+.pagination>li>span:hover {
+	color: @color2;
+}
+
+/* -------------------- TABLE LISTING -------------------------- */
+
+table.listing  {
+    width:100%;
+
+    td {
+	    padding:4px;
+	    padding-top:8px;
+	    padding-bottom:8px;
+	    border-bottom:1px solid #EEE;
+		
+		&:first-child {
+			font-weight:bold;
+		}
+	}
+}
+
+/* -------------------- MENU ONGLET -------------------------- */
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+	border-top:2px solid @color1;
+}
+.nav-tabs>li>a {
+	border:1px solid #EEE;
+	border-bottom: 0;
+}
+
+
+/* -------------------- ICONS EXTRA -------------------------- */
+
+i.fa.circle {
+	border:2px solid;
+	.rounded(50px);
+	padding:4px 5px;
+	color:#555;
+	border-color: #555;
+	.transition(.3s);
+	font-size:12px;
+
+	&:hover {
+		color:@color2;
+		border-color: @color2;
+	}
+}
+
+/* -------------------- MODAL -------------------------- */
+
+.modal-content {
+	.rounded(0);
+ 
+	.modal-header {
+		background-color: @color2;
+		color: white;
+		border-bottom: 0;
+		padding:1px;
+		padding-left: 15px;
+		height:45px;
+		h3 {
+			color: white;
+			margin:0;
+			line-height: 45px;
+			font-size: 17px;
+			font-weight: 300;
+			border-bottom: 0;
+		}
+		button.close {
+			color:white;
+			font-size: 20px;
+			margin-right: 10px;
+			line-height: 40px;
+			filter: alpha(opacity=50);
+    		opacity: .5;
+    		&:hover {
+    			filter: alpha(opacity=30);
+    			opacity: .3;
+    		}
+		}
+	}
+	.modal-body {
+		h2 {
+			font-size: 19px;
+		}
+		font-size:15px;
+	}
+	.modal-footer {
+		border-top: 0;
+
+		.btn-confirm {
+			background-color: @color2;
+			color: white;
+			border: 0;
+			&:hover {
+				background-color: lighten(@color2,15%);
+			}
+		}
+	}
+}
+
+
+/* -------------------- BLOC DE CONTENU ET STATS -------------------------- */
+
+.block {
+	margin-bottom: 20px;
+
+	.block-header {
+		color: @color2;	
+		padding:8px 15px;
+		font-size: 18px;
+		border-bottom: 2px solid @color2;
+	}
+	.block-body {
+		border: 1px solid #DDD; 
+		padding:8px 15px;
+		//
+	}
+
+}
+/* PETIT BLOC ICON + CHIFFRE */
+.one-stat-block {
+	
+	padding: 20px;
+	color:@color2;
+	text-align: center;
+	height:200px;
+	
+	.stat-label {
+		font-size: 14px;
+		color:#555;
+	}
+	.stat-value {
+		font-size: 40px;
+		font-weight: 700;
+		
+	}
+}
+/* LISTE D'ELEMENTS AVEC POURCENTAGE (MAP) */
+.list_perc {
+
+	width:100%;	
+	margin-top:15px; 
+
+	.perclist-row {
+		position:relative; height:34px; line-height:34px;
+		.percbar, .percbar-empty {
+			position:absolute; 
+			z-index:10; 
+			height:2px; 
+			bottom:0px;
+			background-color:@color1;
+		}
+		.percbar-empty {
+			background-color:#EEE;
+		}
+		.perclist-label {
+			position:relative; 
+			z-index:100; 
+			padding-left:5px;
+		}
+	}
+}
+
+/* -------------------- APPLICATION DES COULEURS DU TEMPLATE AUX COMPOSANTS -------------------------- */
+
+.checkbox-switch [type="checkbox"]:checked + label:before {
+    background:@color2; 
+}
+.checkbox-badge [type="checkbox"]:checked + label,
+.radio-badge [type="radio"]:checked + label,
+.checkbox-badge-group [type="checkbox"]:checked + label,
+.radio-badge-group [type="radio"]:checked + label {
+        background-color:@color2;
+}
+ .checkbox-smooth [type="checkbox"] + label:after,
+.radio-smooth [type="radio"] + label:after {
+    	background-color:@color2; 
+}
+.badge {
+	font-weight: 400;
+	background-color: @color2;
+}
+
+
+/* -------------------- EXTRA -------------------------- */
+
+#loading {  
+	right:25px; 
+  	top:25px;
+}
+
+/* -------------------- RESPONSIVE -------------------------- */
+
+@media (min-width: 1200px) {/* LG,  écran large */ 
+
+}
+@media (max-width: 1200px) { /* MD,  écran moyen */
+
+}
+@media (max-width: 992px) { /* XS, tablette */
+	h1 {
+		font-size: 45px;
+	}
+	.table-control {
+		h2 {
+			font-size:22px;
+			line-height: 43px;
+		}
+		a.button {
+			font-size:15px;
+			padding:4px 12px;
+			margin-top:6px;
+		}
+	}
+
+	header {
+		width:70px;
+	}
+	#main-container {
+		padding-left:90px;
+	}
+	#logo {
+		width:40px;
+		margin-left: 15px;
+	}
+
+	#menu-header {
+
+		li {
+			text-align: center;
+			height: 45px;
+			a {
+				height: 45px;
+				line-height: 0px;
+			}
+			a span {
+				display:none;
+			}
+		}	
+	}
+}
+@media (max-width: 767px) { /* SM,  mobile */
+	h1 {
+		font-size: 40px;	
+	}
+
+	.table-control {
+		a.button {
+			float: left;
+			font-size:14px;
+			
+		}
+	}
+
+}

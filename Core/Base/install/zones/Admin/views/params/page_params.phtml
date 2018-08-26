@@ -1,0 +1,35 @@
+
+    <h1><?= $this->icon('cog') ?> Paramètres</h1>
+    <br>
+    <ul id="stats_tabs" class="nav nav-tabs">
+
+    <?php if ($manage_params) : ?>
+    <li class="active"><a href="#" data-ajax="<?= $this->url('admin-widget-params') ?>" data-ajax-target="#params-container">Paramètres</a></li>
+	<?php endif; ?>
+	<?php if ($manage_users) : ?>
+	<li ><a href="#" data-ajax="<?= $this->url('admin-widget-users', array('action'=>'list')) ?>" data-ajax-target="#params-container">Utilisateurs</a></li>
+    <?php endif; ?>
+    <?php if ($manage_permissions) : ?>
+    <li><a href="#" data-ajax="<?= $this->url('admin-widget-permissions', array('action'=>'list')) ?>" data-ajax-target="#params-container">Permissions</a></li>
+	<?php endif; ?>
+	<?php if ($manage_variables) : ?>
+	<li><a href="#" data-ajax="<?= $this->url('admin-widget-variables') ?>" data-ajax-target="#params-container">Variables</a></li>
+	<?php endif; ?>
+	</ul>
+
+    <div id="params-container" data-ajax-container>
+
+            <?= $this->widget('params') ?>
+ 
+    </div>
+
+    <script>
+    $(document).ready(function(){
+
+    	$('#stats_tabs li a').click(function(){
+    		$('#stats_tabs li').removeClass('active');
+    		$(this).parent().addClass('active');
+    	});
+    });
+    </script>
+  

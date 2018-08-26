@@ -1,0 +1,22 @@
+
+<style>@import url('/<?= $this->request->zone ?>/css/panel.css?d=2');</style>
+
+<div id="panel-page">
+    <header style="text-align:center"><img src="<?= $this->img('logo2.png') ?>" /></header>
+
+    <?php $this->menu('panel'); ?>
+
+    <div class="clear"></div>
+    
+    <section class="main">
+
+    	<?php $this->load_page(); ?>
+
+    	<div class="clear"></div>
+    	
+	</section>
+
+</div>
+
+
+

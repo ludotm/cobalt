@@ -1,0 +1,355 @@
+.anim-test() {
+/*
+    animation-name: Où on indique le nom de l'animation à utiliser. (obligatoire)
+    animation-duration: Où on indique la durée en milliseconde (ms) ou en seconde (s) de l'animation. (Obligatoire)  
+    animation-timing-function: Définit un effet de timing à utiliser (le modèle d'interpolation) entre chaque keyframe. Comme vu précédemment, cette propriété est également modifiable au sein même d'une keyframe. (Facultative)
+    animation-delay: Cette valeur définira un délai d'attente avant le début de l'animation, ou dans le cas d'une valeur négative, l'avance que doit prendre l'animation avant de débuter. (Facultative)
+    animation-iteration-count: Le nombre de fois que l'animation doit être effectué. La valeur devra être un nombre entier ou le mot clé infinite pour que l'animation se répète à l'infinie. La valeur par défaut est de 1. (Facultative)
+    animation-direction: Définira si l'animation doit toujours jouer du début à la fin, ou si une fois rendu à la fin, elle doit refaire l'animation en sens inverse. Par défaut l'animation recommencera du début (normal), mais l'utilisation du mot clé alternate alternera la direction de l'animation. Démonstration d'animation-direction (Facultative)
+    animation-fill-mode: Cette propriété définit l'état de départ et de fin de votre animation. Voici les différentes valeurs possibles:
+    forwards: indique au navigateur de laisser l'élément dans sont état final lors de la dernière itération. (l'élément ne revient donc pas à son état initial)
+    backwards: indique au navigateur de placer l'élément dans son état définit au keyframe 0% au chargement de la page, même si un délais négatif est indiqué.
+    both: appliquera les deux valeurs précédentes.
+    none: indiquera au navigateur de styler l'élément selon son état à la première keyframe visible (dans le cas d'un délais négatif) et de ramener l'animation à la keyframe 0% après la dernière itération. Ceci est le comportement par défaut.
+    
+    linear  The animation has the same speed from start to end  Play it » 
+    ease  Default value. The animation has a slow start, then fast, before it ends slowly   Play it » 
+    ease-in   The animation has a slow start  Play it » 
+    ease-out  The animation has a slow end  Play it » 
+    ease-in-out   The animation has both a slow start and a slow end  Play it » 
+    cubic-bezier(n,n,n,n)   Define your own values in the cubic-bezier function
+    Possible values are numeric values from 0 to 1  
+    initial   Sets this property to its default value. Read about initial   
+    inherit
+
+    selecteur {
+      animation: <name> <duration> <timing-function> <delay> <iteration-count> <direction> <fill-mode>;
+    }
+
+*/
+}
+
+.anim-test2() {
+  
+  @animation-name:change-color;
+
+  @frames: {
+    0% {color: blue;}
+    50% {color: green;}
+    100% {color: white;}
+  };
+  @frames: {
+    0% {font-size:30px;}
+    100% {font-size:10px;}
+  };
+
+  .keyframes (@animation-name, @frames);
+
+  
+  &:hover {
+    .animate(@animation-name, 1s, ease-in-out, infinite);
+  }
+}
+
+.anim-return-block () {
+
+}
+.anim-scale-opacity () {
+
+}
+.anim-cube (@name, @color, @dist1, @dist2, @duration:0.5s, @delay:0s, @timing:ease-in-out) {
+  
+  .shadow-cube(@color, @dist1);
+
+  .one-animation (~"@{name}-1", @duration, @delay, {
+        from{
+          top: @dist1;
+          left: @dist1;
+        }
+        to {
+          top: @dist2;
+          left: -@dist2;
+        }
+        
+      }, @timing);
+
+  &:after {
+      .one-animation (~"@{name}-2", @duration, @delay, {
+        from{
+           height: @dist1;
+            top: -@dist1;
+        }
+        to {
+          height: @dist2;
+            top: -@dist2;
+        }
+        
+      }, @timing);
+  }
+
+  &:before {
+      .one-animation (~"@{name}-3", @duration, @delay, {
+        from{
+          width: @dist1;
+          right: -@dist1;
+        }
+        to {
+          width: @dist2;
+          right: -@dist2;
+        }
+        
+      }, @timing);
+  }
+
+}
+.anim-cube-block-out (@name, @color, @dist1, @dist2, @duration:0.5s, @delay:0s, @timing:ease-in-out) {
+
+  .shadow-block(@color, @dist1);
+
+  .one-animation (~"@{name}-shadow", @duration, @delay, {
+        from{
+          .scale(1, 50% 50%);
+          margin-top: @dist1;
+          .drop-shadow(0px, 0px, 0px, fade(black, 0%));
+        }
+        to {
+          .scale(1.1, 50% 50%);
+          margin-top: @dist2*4;
+          .drop-shadow(0px, @dist2/2, @dist2/2, fade(black, 20%));
+        }
+        
+  }, @timing);
+
+  &:after {
+      .one-animation (@name, @duration, @delay, {
+        from{
+          border:@dist1 solid transparent;
+          border-bottom: @dist1 solid lighten(@color, 20%);
+          top: -@dist1;
+        }
+        to {
+          border:@dist2 solid transparent;
+          border-bottom: @dist2 solid lighten(@color, 20%);
+          top: -@dist2;
+        }
+        
+      }, @timing);
+  }
+}
+.anim-cube-block-in (@name, @color, @dist1, @dist2, @duration:0.5s, @delay:0s, @timing:ease-in-out) {
+
+  .shadow-block(@color, @dist2);
+
+  .one-animation (~"@{name}-shadow", @duration, @delay, {
+        from{
+          .scale(1.1, 50% 50%);
+          margin-top: @dist2*4;
+          .drop-shadow(0px, @dist2/2, @dist2/2, fade(black, 20%));
+        }
+        to {
+          .scale(1, 50% 50%);
+          margin-top: @dist1;
+          .drop-shadow(0px, 0px, 0px, fade(black, 0%));
+        }
+        
+  }, @timing);
+
+  &:after {
+      .one-animation (@name, @duration, @delay, {
+        from{
+          border:@dist2 solid transparent;
+          border-bottom: @dist2 solid lighten(@color, 20%);
+          top: -@dist2;
+        }
+        to {
+          border:@dist1 solid transparent;
+          border-bottom: @dist1 solid lighten(@color, 20%);
+          top: -@dist1;
+        }
+        
+      }, @timing);
+  }
+}
+.anim-cube-block-hover (@name, @color, @dist1, @dist2, @duration:0.5s, @delay:0s, @timing:ease-in-out) {
+
+  .anim-cube-block-in(~"@{name}-in", @color, @dist1, @dist2, @duration, @delay, @timing);
+  &:hover {
+    .anim-cube-block-out(@name, @color, @dist1, @dist2, @duration, @delay, @timing);
+  }
+}
+
+.anim-explode-contours (@name, @color, @strengh:1px, @rounded:0px, @duration:0.3, @delay:0, @timing:ease-in-out) {
+
+    position: relative;
+    z-index: 2;
+   
+    &:after {
+      width:100%;
+      height:100%;
+      content: ' ';
+      position: absolute;
+
+      border:@strengh solid @color;
+      background-color: transparent;
+      z-index: 1;
+
+      .rounded(@rounded);
+      .opacity(0);
+    }
+
+    &:hover:after {
+      .one-animation (@name, @duration, @delay, {
+        from {
+          .scale(1, 50% 50%);
+          .opacity(1);
+        }
+        to {
+          .scale(2, 50% 50%);
+          .opacity(0);
+        }
+      }, @timing);
+    }
+}
+
+.flip-box (@width, @height, @transition:0.6s, @perspective:800px) {
+  .size(@width, @height);
+  .perspective(@perspective);
+  transform-style: preserve-3d;
+  
+  &:hover .flipper, 
+  .hover .flipper {
+    .rotateY(180deg, 50% 50%);
+  }
+  .flipper {
+    position: relative;
+    .transition(@transition);
+    transform-style: preserve-3d;
+  }
+  .front, .back {
+    .size(@width, @height);
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .front {
+    z-index: 2;
+    .rotateY(0deg);
+  }
+  .back {
+    .rotateY(180deg, 50% 50%);
+  }
+}
+.flip-box-vertical (@width, @height, @transition:0.6s, @perspective:800px) {
+  .size(@width, @height);
+  .perspective(@perspective);
+  transform-style: preserve-3d;
+
+  &:hover .flipper, 
+  .hover .flipper {
+    .rotateX(180deg, 50% 50%);
+  }
+  .flipper {
+    position: relative;
+    .transition(@transition);
+    transform-style: preserve-3d;
+  }
+  .front, .back {
+    .size(@width, @height);
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .front {
+    z-index: 2;
+    .rotateX(0deg, 0% 0%);
+  }
+  .back {
+    .rotateX(180deg, 0% 0%);
+  }
+}
+
+.anim-infinite-rotation (@name, @duration:2s, @delay:0) {
+
+  .infinite-animation(@name, @duration, @delay, {
+      from {.rotation(0deg, 50% 50%);}
+      to {.rotation(360deg, 50% 50%);}
+  }, linear);
+}
+.anim-translation () {
+  .quick-animation(anim3, 0.8s, 0s, margin-left, 320px, 0px);
+  .quick-animation(anim3, 0.8s, 0s, margin-left, 320px, 0px);
+}
+.anim-translation (@name, @direction, @pos, @dist, @delay:0s, @duration:0.5s, @timing:ease-in-out) {
+  position: absolute;
+  z-index: 1;
+  .opacity(0);
+  @{direction}: @pos;
+
+  .one-animation (@name, @duration, @delay, {
+    from {
+      @{direction}:@pos+@dist;
+      .opacity(0);
+    }
+    to {
+      @{direction}:@pos;
+      .opacity(1);
+    }
+  }, @timing);
+}
+
+.anim-blur-opacity (@name, @strengh, @delay:0s, @duration:0.5s, @letterspacing:0px, @timing:ease-in-out) {
+
+  .opacity(0);
+
+  .one-animation (@name, @duration, @delay, {
+    from {
+      letter-spacing: @letterspacing;
+      .blur(@strengh);
+      .opacity(0);
+    }
+    to {
+      letter-spacing: 0px;
+      .blur(0px);
+      .opacity(1);
+    }
+  }, @timing);
+}
+
+.anim-levitation (@name, @dist:15px, @duration:1s, @delay:0s) {
+  
+  position: relative;
+  z-index: 1;
+  
+  div.levitation-object {
+    width:100%;
+    height:100%;
+    position: absolute;
+    z-index: 3;
+
+    .infinite-animation-alternate(@name, @duration, @delay, {
+        from {bottom:0px;}
+        to {bottom:@dist;}
+    });  
+  }
+
+  div.levitation-shadow {
+    position: absolute;
+    width: 100%;
+    height:1px;
+    bottom: @dist;
+    background-color: fade(black, 0%);
+    z-index: 1;
+
+    .drop-shadow(0, @dist, 4px, fade(black, 40%));
+    .drop-shadow(0, @dist, 8px, fade(black, 60%));
+    .drop-shadow(0, @dist, 15px, fade(black, 90%));
+    .drop-shadow(0, @dist, 20px, fade(black, 100%));
+
+    .infinite-animation-alternate(test-shadow, @duration, @delay, {
+        from {width:90%; margin-left:5%;}
+        to {width:74%; margin-left:13%;}
+    }); 
+  }
+}

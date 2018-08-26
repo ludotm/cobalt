@@ -1,0 +1,42 @@
+
+        <header>
+
+            <div id="logo">
+                <a href="<?= $this->url('superadmin-page-clients') ?>">
+                    <img src="<?= $this->img('logo_inner.png'); ?>" border="0" />
+                </a>
+            </div>
+
+            <?= $this->menu('header') ?>
+            
+        </header>
+
+        <div id="top-bar">
+            <div id="top-news">
+                <?php if ($message != '') : ?>
+                <span class="text-<?= $color ?>"><i class="fa fa-<?= $type_message ?>"></i> <?= $message ?></span>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <section id="main-container">
+
+            <div class="container-fluid"> 
+            
+                <div class="row">
+                    <div class="col-xs-12">
+                    
+                    <?php $this->load_page(); ?>
+                    
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+
+                <footer>
+
+                </footer>
+            
+            </div>
+
+        </section>

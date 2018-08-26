@@ -1,0 +1,42 @@
+
+<h2><?= $title ?></h2>
+
+<br>
+<style>
+.error_table {
+	width:100%;
+	line-height:32px;
+}
+.error_table td {
+	padding-left:10px;
+}
+.error_table td.superadmin {}
+.error_table td.td1 {color:yellow;}
+.error_table td.td2 {}
+.error_table td.td3.superadmin {color:orange;}
+.error_table td.td4 {color:pink;}
+.error_table td.td5 {}
+.error_table td.td6 {color:#EEE;}
+.error_table td.td7 {}
+.error_table td.td8 {color:cyan;}
+</style>
+<div name="script_frame" style="background-color:#211e1e; color:#BBB; border:0;  width:100%; height:500px; overflow:auto; padding:15px; ">
+<table class="error_table">
+<?php foreach ($content as $line) : ?>
+	<?php $data = explode(' | ', $line); ?>
+	<?php if (!empty($data)) : ?>
+	<tr>
+		<td class="td1"><?= isset($data[0]) ? $data[0] : '' ?></td>
+		<td class="td2"><?= isset($data[1]) ? $data[1] : '' ?></td>
+		<td class="td3 <?= isset($data[2]) && $data[2] != 'Superadmin' ? 'superadmin' : '' ?>">
+			<?= isset($data[2]) ? $data[2] : '' ?></td>
+		<td class="td4"><?= isset($data[3]) ? $data[3] : '' ?></td>
+		<td class="td5"><?= isset($data[4]) ? $data[4] : '' ?></td>
+		<td class="td6"><?= isset($data[5]) ? $data[5] : '' ?></td>
+		<td class="td7"><?= isset($data[6]) ? $data[6] : '' ?></td>
+		<td class="td8">Ligne <?= isset($data[7]) ? $data[7] : '' ?></td>
+	</tr>
+	<?php endif; ?>	
+<?php endforeach; ?>
+</table>
+</div>

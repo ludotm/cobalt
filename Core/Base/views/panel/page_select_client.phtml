@@ -1,0 +1,12 @@
+
+<h2>Séléctionnez un client</h2>
+
+<?php foreach ($clients as $client) : ?>
+
+	<a href="?id=<?= $client->id ?>"><?= $client->name ?></a><hr>
+
+<?php endforeach; ?>
+
+
+
+

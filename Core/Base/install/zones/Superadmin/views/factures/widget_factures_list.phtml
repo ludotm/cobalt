@@ -1,0 +1,54 @@
+<div class="row" style="margin-top:20px; margin-bottom:10px;">
+<form action="<?= $this->url('superadmin-widget-factures_list') ?>" method="POST" id="filter-form" data-ajax-form="none">
+	<div class="col-sm-2"> 
+	<select name="month" style="width:100%;">
+		<option value="0">Mois</option>
+		<option value="0">-</option>
+		<option value="01" <?= $month == '01' ? 'SELECTED' : '' ?>>Janvier</option>
+		<option value="02" <?= $month == '02' ? 'SELECTED' : '' ?>>Février</option>
+		<option value="03" <?= $month == '03' ? 'SELECTED' : '' ?>>Mars</option>
+		<option value="04" <?= $month == '04' ? 'SELECTED' : '' ?>>Avril</option>
+		<option value="05" <?= $month == '05' ? 'SELECTED' : '' ?>>Mai</option>
+		<option value="06" <?= $month == '06' ? 'SELECTED' : '' ?>>Juin</option>
+		<option value="07" <?= $month == '07' ? 'SELECTED' : '' ?>>Juillet</option>
+		<option value="08" <?= $month == '08' ? 'SELECTED' : '' ?>>Août</option>
+		<option value="09" <?= $month == '09' ? 'SELECTED' : '' ?>>Septembre</option>
+		<option value="10" <?= $month == '10' ? 'SELECTED' : '' ?>>Octobre</option>
+		<option value="11" <?= $month == '11' ? 'SELECTED' : '' ?>>Novembre</option>
+		<option value="12" <?= $month == '12' ? 'SELECTED' : '' ?>>Décembre</option>
+	</select>
+	</div>
+	<div class="col-sm-2"> 
+	<select name="year" style="width:100%;">
+		<option value="0">Année</option>
+		<option value="0">-</option>
+		<?php $current_year = date('Y'); ?>
+		<?php for($i=2017; $i<=$current_year; $i++) : ?>
+		<option value="<?= $i ?>" <?= $year == $i ? 'SELECTED' : '' ?>><?= $i ?></option>
+		<?php endfor; ?>
+	</select>
+	</div>
+	<div class="col-sm-3"> 
+	<select name="biguser" style="width:100%;">
+		<option value="0">Client</option>
+		<option value="0">-</option>
+		<?php foreach ($all_big_users as $big_user) : ?>
+		<option value="<?= $big_user->id ?>" <?= $big_user->id == $id_big_user ? 'SELECTED' : '' ?>><?= $big_user->name ?></option>
+		<?php endforeach; ?>
+	</select>
+	</div>
+	<div class="col-sm-3"> 
+	<select name="status" style="width:100%;">
+		<option value="0">Status</option>
+		<option value="0">-</option>
+		<option value="1" <?= $status == '1' ? 'SELECTED' : '' ?>>Factures non payées</option>
+	</select>
+	</div>
+	<div class="col-sm-2"> 
+		<input type="submit" name="submit"  style="width:100px; float:right;" value="Filtrer">
+	</div>
+</form>
+</div>
+
+<?= $table->draw() ?>
+

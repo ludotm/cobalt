@@ -1,0 +1,12 @@
+<h2>Créer une zone</h2><br>
+
+<?php if ($new_route) :  ?>
+
+    La nouvelle zone a été créée, reportez la route correspondante : <br><br>
+    <code><?= nl2br($new_route) ?></code>
+
+<?php else : ?>
+
+    <?= $form->draw() ?>
+
+<?php endif; ?>

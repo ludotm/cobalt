@@ -1,0 +1,111 @@
+
+
+
+
+/* MARGINS
+*******************************************************************************/
+
+.margin1 {margin:1px;}
+.margin2 {margin:2px;}
+.margin3 {margin:3px;}
+.margin4 {margin:4px;}
+.margin5 {margin:5px;}
+.margin6 {margin:6px;}
+.margin7 {margin:7px;}
+.margin8 {margin:8px;}
+.margin9 {margin:9px;}
+.margin10 {margin:10px;}
+.margin15 {margin:15px;}
+.margin20 {margin:20px;}
+.margin30 {margin:30px;}
+
+.margin-h(@size) {
+	margin-left:@size;
+	margin-right:@size;
+}
+.margin-v(@size) {
+	margin-top:@size;
+	margin-bottom:@size;
+}
+.margin-hv(@h, @v) {
+	margin-top:@v;
+	margin-bottom:@v;
+	margin-left:@h;
+	margin-right:@h;
+}
+
+.margin0-topleft {
+	margin-left:0;
+	margin-top:0;
+}
+
+.margin0-topright {
+	margin-right:0;
+	margin-top:0;
+}
+
+/* PADDINGS
+*******************************************************************************/
+
+.padding1 {padding:1px;}
+.padding2 {padding:2px;}
+.padding3 {padding:3px;}
+.padding4 {padding:4px;}
+.padding5 {padding:5px;}
+.padding6 {padding:6px;}
+.padding7 {padding:7px;}
+.padding8 {padding:8px;}
+.padding9 {padding:9px;}
+.padding10 {padding:10px;}
+.padding15 {padding:15px;}
+.padding20 {padding:20px;}
+.padding30 {padding:30px;}
+
+.padding-h(@size) {
+	padding-left:@size;
+	padding-right:@size;
+}
+.padding-v(@size) {
+	padding-top:@size;
+	padding-bottom:@size;
+}
+.padding-hv(@h, @v) {
+	padding-top:@v;
+	padding-bottom:@v;
+	padding-left:@h;
+	padding-right:@h;
+}
+
+/* ROUNDED
+*******************************************************************************/
+.rounded5 {.rounded(5px)}
+.rounded10 {.rounded(10px)}
+
+.rounded(@radius: 4px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.rounded-all(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+  -webkit-border-top-right-radius: @topright;
+  -webkit-border-bottom-right-radius: @bottomright;
+  -webkit-border-bottom-left-radius: @bottomleft;
+  -webkit-border-top-left-radius: @topleft;
+  -moz-border-radius-topright: @topright;
+  -moz-border-radius-bottomright: @bottomright;
+  -moz-border-radius-bottomleft: @bottomleft;
+  -moz-border-radius-topleft: @topleft;
+  border-top-right-radius: @topright;
+  border-bottom-right-radius: @bottomright;
+  border-bottom-left-radius: @bottomleft;
+  border-top-left-radius: @topleft;
+  .background-clip(padding-box);
+}
+.rounded-top(@radius) {.rounded-all(@radius, 0, 0, @radius);}
+.rounded-bottom(@radius) {.rounded-all(0,@radius,@radius,0);}
+.rounded-left(@radius) {.rounded-all(0, 0, @radius, @radius);}
+.rounded-right(@radius) {.rounded-all(@radius, @radius, 0, 0);}
+
+
+

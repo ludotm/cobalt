@@ -1,0 +1,142 @@
+
+.button () {
+  .cursor-hand;
+  .text-center;
+}
+
+/* CRYSTAL
+---------------------------------*/
+.crystal-g (@bg-color) {
+  background-color: @bg-color;
+  .text-white-incruste;
+  .crystal-gradient(255, 0.6, 0.3, 0.1, 0);
+  border: 1px solid darken(@bg-color,10%);
+  .inner-light (0px, 1px, 0px, 0.8);
+}
+.crystal-button (@bg-color) {
+  .crystal-g (@bg-color);
+  .button;
+
+  &:hover {
+    .crystal-gradient(255, 0.8, 0.4, 0.2, 0);
+  }
+  &:active {
+    .inner-shadow(0,0,5px,0.3);
+  }
+}
+.crystal-gradient (@color:255, @op1:0.6, @op2:0.3, @op3:0.1, @op4:0) {
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(@color,@color,@color,@op1)), color-stop(50%, rgba(@color,@color,@color,@op2)), color-stop(50%, rgba(@color,@color,@color,@op3)), color-stop(100%, rgba(@color,@color,@color,0)));
+    background-image: -webkit-linear-gradient(top, rgba(@color,@color,@color,@op1) 0%, rgba(@color,@color,@color,@op2) 50%, rgba(@color,@color,@color,@op3) 50%, rgba(@color,@color,@color,@op4) 100%);
+    background-image: -moz-linear-gradient(top, rgba(@color,@color,@color,@op1) 0%, rgba(@color,@color,@color,@op2) 50%, rgba(@color,@color,@color,@op3) 50%, rgba(@color,@color,@color,@op4) 100%);
+    background-image: -ms-linear-gradient(top, rgba(@color,@color,@color,@op1) 0%, rgba(@color,@color,@color,@op2) 50%, rgba(@color,@color,@color,@op3) 50%, rgba(@color,@color,@color,@op4) 100%);
+    background-image: -o-linear-gradient(top, rgba(@color,@color,@color,@op1) 0%, rgba(@color,@color,@color,@op2) 50%, rgba(@color,@color,@color,@op3) 50%, rgba(@color,@color,@color,@op4) 100%);
+    background-image: linear-gradient(top, rgba(@color,@color,@color,@op1) 0%, rgba(@color,@color,@color,@op2) 50%, rgba(@color,@color,@color,@op3) 50%, rgba(@color,@color,@color,@op4) 100%);
+}
+
+
+
+/* BOUTON RELIEF
+---------------------------------*/
+.relief-g (@bg-color:orange, @bg-color2:lighten(@bg-color, 20%), @border-color:darken(@bg-color, 13%), @border-size: 5px, @font-color:white) {
+  
+  color: @font-color;
+  border:0;
+  .bold;
+  .text-relief;
+  .linear-gradient(@bg-color, @bg-color2);
+  box-shadow: @border-color 0 @border-size 0px, rgba(0, 0, 0, 0.3) 0 (@border-size+3) 3px;
+}
+
+.relief-button (@bg-color:orange, @bg-color2:lighten(@bg-color, 20%), @border-color:darken(@bg-color, 13%), @border-size: 5px, @font-color:white) {
+  
+  .relief-g(@bg-color, @bg-color2, @border-color, @border-size, @font-color);
+  .button;
+
+  .transition(0.5s);
+
+  &:hover {
+    .linear-gradient(@bg-color, lighten(@bg-color2, 5%));
+  }
+  &:active {
+    position: relative;
+    top: @border-size;
+    box-shadow: inset rgba(0,0,0,0.4) 0px 0px 5px;
+  }
+}
+
+.relief-no-shadow (@bg-color:orange, @border-color:darken(@bg-color, 13%), @border-size: 5px, @font-color:white) {
+  .relief-g(@bg-color, @bg-color, @border-color, @border-size, @font-color);
+  box-shadow: @border-color 0 @border-size 0px;
+}
+
+
+
+/* GLOSSY
+---------------------------------*/
+.glossy (@bg-color, @bg-color2:lighten(@bg-color, 30%), @inner-light:1px) {
+  .text-white-incruste;
+  .linear-gradient(@bg-color, @bg-color2);
+  .inner-light (0px, @inner-light, 0px, 0.8);
+  border: 1px solid darken(@bg-color,10%);
+}
+.glossy-button (@bg-color, @bg-color2:lighten(@bg-color, 30%), @inner-light:1px) {
+  .glossy(@bg-color, @bg-color2, @inner-light);
+  .button;
+  .transition(background 0.2s linear);
+
+  &:hover {
+    .linear-gradient(@bg-color, lighten(@bg-color2,6%));
+  }
+  &:active {
+    .inner-shadow(0,0,5px,0.3);
+  }
+}
+
+/* BORDERED
+---------------------------------*/
+.bordered-button (@border-color:orange, @border-size: 3px, @bg-color:#EDEDED, @font-color:gray) {
+  
+  .button;
+  .transition(0.5s);
+
+  background-color:@bg-color;
+  color: @font-color;
+  text-decoration: none;
+
+  border: 0;
+  border-top: @border-size solid darken(@bg-color, 10%);
+
+  &:hover {
+      border-color:@border-color;
+      color: lighten(@font-color, 20%);
+  }
+  &:active {
+
+  }
+}
+
+
+
+.futura (@bg-color, @bg-color2:lighten(@bg-color, 30%), @inner-light:1px) {
+
+  .text-white-incruste;
+  .linear-gradient(@bg-color, @bg-color2);
+
+  .inner-light (0px, @inner-light, 0px, 0.8);
+  border: 7px solid darken(@bg-color,10%);
+  .border-gradient;
+}
+.futura-button (@bg-color, @bg-color2:lighten(@bg-color, 30%), @inner-light:1px) {
+  
+  .glossy(@bg-color, @bg-color2, @inner-light);
+  .button;
+  .transition(background 0.2s linear);
+
+  &:hover {
+    .linear-gradient(@bg-color, lighten(@bg-color2,6%));
+  }
+  &:active {
+    .inner-shadow(0,0,5px,0.3);
+  }
+}
+

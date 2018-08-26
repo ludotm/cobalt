@@ -1,0 +1,109 @@
+	
+	<div style="position:relative; margin-bottom:20px;">
+
+    	<h1><?= $this->icon('bar-chart', '') ?> Statistiques</h1>
+
+    	<div id="datepicker-container"><?= $form_date->open_tag() ?>Du <?= $form_date->get('date1')->draw() ?> au <?= $form_date->get('date2')->draw() ?> <input type="submit" value="Ok" /></form>
+    	</div>
+
+    	<div id="period-selector" class="dropdown" style="display:inline-block">
+			  <a class="dropdown-toggle"  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <i class="fa fa-clock-o"></i> <span class="caret"></span> 
+			  </a>
+			  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+			    <li><a href="#" data-period="today">Aujourd'hui</a></li>
+			    <li><a href="#" data-period="week">Depuis une semaine</a></li>
+			    <li><a href="#" data-period="month">Depuis un mois</a></li>
+			    <li><a href="#" data-period="six-months">Depuis 6 mois</a></li>
+                <li><a href="#" data-period="always">Depuis toujours</a></li>
+			  </ul>
+			</div>
+	   </div>
+
+    <ul id="stats_tabs" class="nav nav-tabs">
+	  <li class="active"><a href="#" data-ajax="<?= $this->url('superadmin-widget-stats', array('action'=>'clients')) ?>" data-ajax-target="#stats-container">Clients</a></li>
+	</ul>
+
+    <div id="stats-container" data-ajax-container="<?= $this->url('superadmin-widget-stats', array('action'=>'clients')) ?>">
+
+        <?= $this->widget('stats', array('action' => 'clients')) ?>
+
+    </div>
+
+    <script>
+    $(document).ready(function(){
+
+    	$('#stats_tabs li a').click(function(){
+    		$('#stats_tabs li').removeClass('active');
+    		$(this).parent().addClass('active');
+    	});
+
+    	$('#period-selector .dropdown-menu a').click(function(event){
+    		event.preventDefault();
+
+    		var period = $(this).data('period');
+
+    		$form = $('#datepicker-container form');
+    		$datepicker1 = $('#datepicker-container input[name="date1"]');
+    		$datepicker2 = $('#datepicker-container input[name="date2"]');
+
+    		switch (period) {
+    			
+    			case 'today':
+    				d = new Date();
+    				$datepicker1.datepicker("setDate", new Date(d.getFullYear(),d.getMonth(),d.getDate()));
+    				$datepicker2.datepicker("setDate", new Date(d.getFullYear(),d.getMonth(),d.getDate()));
+    				break;
+
+    			case 'week':
+    				d = new Date();
+    				$datepicker1.datepicker("setDate", new Date(d.getFullYear(),d.getMonth(),d.getDate()-7));
+    				$datepicker2.datepicker("setDate", new Date(d.getFullYear(),d.getMonth(),d.getDate()));
+    				break;
+
+    			case 'month':
+    				d = new Date();
+    				$datepicker1.datepicker("setDate", new Date(d.getFullYear(),d.getMonth()-1,d.getDate()));
+    				$datepicker2.datepicker("setDate", new Date(d.getFullYear(),d.getMonth(),d.getDate()));
+    				break;
+
+    			case 'six-months':
+    				d = new Date();
+    				$datepicker1.datepicker("setDate", new Date(d.getFullYear(),d.getMonth()-6,d.getDate()));
+    				$datepicker2.datepicker("setDate", new Date(d.getFullYear(),d.getMonth(),d.getDate()));
+    				break;
+
+                case 'always':
+                    $datepicker1.val('');
+                    $datepicker2.val('');
+                    break;
+    		}
+
+            $form.attr('action', $('#stats_tabs .active a').data('ajax'));
+    		$form.submit();
+    	});
+
+		$('#datepicker-container form').submit(function(event){
+
+			event.preventDefault();
+            var target = "#stats-container";
+
+            $.ajax({
+                url:  $('#stats_tabs .active a').data('ajax'),
+                type: 'POST',
+                dataType: 'html',
+                data: $(this).serialize(),
+
+                success: function(html, state, data){
+                    ajax_load_transition (target, html);
+                },
+                error: function(data, state){
+                    
+                },
+
+            });
+
+		});
+
+    });
+    </script>

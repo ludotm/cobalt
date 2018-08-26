@@ -1,0 +1,55 @@
+
+
+    <?php if ($action == 'list') : ?>
+        <br>
+        <section>
+
+            <div class="row table-control">
+
+                <div class="col-sm-6">
+                    <h2>Liste des utilisateurs</h2>
+                </div>
+
+                <div class="col-sm-6" style="padding-top:10px;">
+                    <a href="#" id="add-user" data-ajax="<?= $this->url('admin-widget-users', array('action'=>'form')) ?>" data-transition="slide-left" class="button inverse"><?= $this->icon('user-plus') ?>  Ajouter un utilisateur</a> 
+                </div>
+                
+
+            </div>
+
+            <div class="table-responsive">
+                <?= $table->draw() ?>
+            </div>
+
+        </section>
+
+        <script>
+            function active_user_callback(data) {
+
+                if (data.status == 0) {
+                    console.log($("[data-activeid='"+data.id+"'']"));
+                    $("[data-activeid='"+data.id+"']").find('i').css('color','#CCC');
+                    flash_messenger('L\'utilisateur est maintenant inactif', 'success');
+                } else {
+                    $("[data-activeid='"+data.id+"']").find('i').css('color','#d94561');
+                    flash_messenger('L\'utilisateur est maintenant actif', 'success');
+                }
+            }
+        </script>
+
+    <?php elseif ($action == 'form') : ?>
+
+        <section>
+
+            <a href="#" class="return-arrow" data-ajax="<?= $this->url('admin-widget-users', array('action' => 'list')) ?>" data-transition="slide-right" style="position:absolute; top:-135px; right:15px;">
+                <?= $this->icon('arrow-left') ?><!--arrow-circle-o-left-->
+            </a>
+
+            <h2><?= !$form->get('id')->value ? 'Ajouter' : 'Modifier' ?> un utilisateur</h2>
+
+            <?= $form->draw('1000px'); ?>
+
+        </section>
+
+
+    <?php endif; ?>

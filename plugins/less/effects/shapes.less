@@ -1,0 +1,384 @@
+
+.square(@size) {
+  .size(@size, @size);
+}
+.losange(@size) {
+  .size(@size, @size);
+  margin: 0 0 0 (@size/100*20);
+  .transform(rotateZ(-45deg), 0 100% 0deg);
+}
+
+.circle(@size) {
+  .size(@size, @size);
+  .rounded((@size/2));
+}
+.ovale(@width, @height) {
+  .size(@width, @height);
+  .rounded(50%);
+}
+.triangle-top (@height:25px, @color:black) {
+  width: 0; 
+  height: 0; 
+  border-left: @height solid transparent;
+  border-right: @height solid transparent;
+  border-bottom: @height solid @color;
+}
+.triangle-bottom (@height:25px, @color:black) {
+  width: 0; 
+  height: 0; 
+  border-left: @height solid transparent;
+  border-right: @height solid transparent;
+  border-top: @height solid @color;
+}
+.triangle-right (@height:25px, @color:black) {
+  width: 0; 
+  height: 0; 
+  border-top: @height solid transparent;
+  border-bottom: @height solid transparent;
+  border-left: @height solid @color;
+}
+.triangle-left (@height:25px, @color:black) {
+  width: 0; 
+  height: 0; 
+  border-top: @height solid transparent;
+  border-bottom: @height solid transparent;
+  border-right: @height solid @color;
+}
+.bubble-top (@width, @height, @color, @rounded:15px, @triangle-size:15px) {
+  .size(@width, @height);
+  .rounded(@rounded);
+  background-color: @color;
+  padding:10px;
+  position: relative;
+  &:before {
+    content:'';
+    position:absolute;
+    top:-@triangle-size;
+    left:(@width/2-@triangle-size);
+    .triangle-top(@triangle-size, @color);
+  }
+}
+.bubble-bottom (@width, @height, @color, @rounded:15px, @triangle-size:15px) {
+  .size(@width, @height);
+  .rounded(@rounded);
+  background-color: @color;
+  padding:10px;
+  position: relative;
+  &:before {
+    content:'';
+    position:absolute;
+    bottom:-@triangle-size;
+    left:(@width/2-@triangle-size);
+    .triangle-bottom(@triangle-size, @color);
+  }
+}
+.bubble-left (@width, @height, @color, @rounded:15px, @triangle-size:15px) {
+  .size(@width, @height);
+  .rounded(@rounded);
+  background-color: @color;
+  padding:10px;
+  position: relative;
+  &:before {
+    content:'';
+    position:absolute;
+    left:-@triangle-size;
+    top:(@height/2-@triangle-size);
+    .triangle-left(@triangle-size, @color);
+  }
+}
+.bubble-right (@width, @height, @color, @rounded:15px, @triangle-size:15px) {
+  .size(@width, @height);
+  .rounded(@rounded);
+  background-color: @color;
+  padding:10px;
+  position: relative;
+  &:before {
+    content:'';
+    position:absolute;
+    right:-@triangle-size;
+    top:(@height/2-@triangle-size);
+    .triangle-right(@triangle-size, @color);
+  }
+}
+
+.pentagon(@size, @color) {
+
+  //.size(@size, @size);
+  
+
+  width: @size;
+  position: relative;
+  top: 0px;
+  border: (@size/100*25) solid rgba(0,0,0,0);
+  border-top: (@size/100*50) solid @color;
+  border-bottom: 0px solid @color;
+
+  &:before {
+    width: 0;
+    height: 0;
+    position: absolute;
+    content: "";
+    bottom: (@size/100*50);
+    left: -(@size/100*25);
+    border: (@size/100*50) solid rgba(0,0,0,0);
+    border-bottom: (@size/100*35) solid @color;
+
+   }
+}
+
+.hexagon (@size, @color) {
+
+  width: @size;
+  height: (@size/100*54);
+  position: relative;
+  border: none;
+  background: @color;
+  text-align: center;
+
+  &:before, &:after {
+    width: 0;
+    height: 0;
+    position: absolute;
+    content: ""; 
+    left: 0;
+    border: (@size/100*50) solid rgba(0,0,0,0);
+    color: inherit;
+    -o-text-overflow: clip;
+      text-overflow: clip;
+      text-shadow: none;
+  }
+  &:before {
+    border-top: 0 solid;
+    border-bottom: (@size/100*30) solid @color;
+    top: -(@size/100*30);
+  }
+  &:after {
+    border-top: (@size/100*30) solid @color;
+    border-bottom: 0 solid;
+    bottom: -(@size/100*30);
+  }
+}
+
+.diamond (@size, @color) {
+
+  width: @size;
+  height: 0;
+  position: relative;
+  margin: (@size/100*20) 0 (@size/100*50);
+  border: (@size/100*25) solid rgba(0,0,0,0);
+  border-top-width: 0;
+  border-bottom-color: @color;
+  
+  &:after {
+      width: 0;
+    height: 0;
+    position: absolute;
+    content: "";
+    top: (@size/100*25-1);
+    left: -(@size/100*25);
+    border: (@size/100*50) solid rgba(0,0,0,0);
+    border-top: (@size/100*70) solid @color;
+    border-bottom-width: 0;
+  }
+}
+
+
+.heart (@size, @color) {
+
+  width: @size;
+  height: (@size/100*90);
+  position: relative;
+  border: none;
+
+  &:before, &:after {
+      width: (@size/100*50);
+    height: (@size/100*80);
+    position: absolute;
+    content: "";
+    top: 0;
+    border: none;
+    background: @color;
+    .rounded((@size/100*50) (@size/100*50) 0 0);    
+  }
+
+  &:before {
+    left: 0px;
+    .transform (rotateZ(-45deg), 0 100% 0deg);
+  }
+  &:after {
+    left: (@size/100*22);
+    .transform (rotateZ(45deg), 100% 100% 0deg);
+
+  }
+}
+
+.star-5 (@size, @color) {
+
+  width: 0;
+  height: 0;
+  position: relative;
+  margin: (@size/100*50) 0;
+  border: @size solid rgba(0,0,0,0);
+  border-top: 0 solid;
+  border-bottom: (@size/100*70) solid @color;
+
+  -webkit-transform: rotateZ(35deg)   ;
+  transform: rotateZ(35deg)   ;
+
+  &:before, &:after {
+      width: 0;
+    height: 0;
+    position: absolute;
+    content: "";
+  }
+  &:before {
+      top: -(@size/100*45);
+    left: -(@size/100*65);
+    border: (@size/100*30) solid rgba(0,0,0,0);
+    border-top: 0 solid;
+    border-bottom: (@size/100*80) solid @color;
+
+    -webkit-transform: rotateZ(-35deg)   ;
+    transform: rotateZ(-35deg)   ;
+  }
+  &:after {
+      top: (@size/100*3)px;
+    left: -(@size/100*105);
+    border: @size solid rgba(0,0,0,0);
+    border-top: 0 solid;
+    border-bottom: (@size/100*70) solid @color;
+
+    -webkit-transform: rotateZ(-70deg)   ;
+    transform: rotateZ(-70deg)   ;
+  }
+}
+
+.round-star-label (@size, @color) {
+  
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border: none;
+  text-align: center;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: @color;
+
+  &:before, &:after {
+      width: 100px;
+    height: 100px;
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    border: none;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: @color;
+    z-index:-1;
+  }
+  &:before {
+    -webkit-transform: rotateZ(30deg)   ;
+    transform: rotateZ(30deg)   ;
+  }
+  &:after {
+    -webkit-transform: rotateZ(60deg)   ;
+    transform: rotateZ(60deg)   ;
+  }
+}
+
+.ribbon (@width, @height, @color) {
+  width: @width;
+  height: @height;
+  border: (@width/2) solid @color;
+  text-align: center;
+  border-top: 0 solid;
+  border-bottom: (@width/100*35) solid rgba(0,0,0,0);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+}
+
+.chevron (@width, @height, @color, @angle:12deg) {
+
+  width: @width;
+  height: @height;
+  position: relative;
+  border: none;
+  text-align: center;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+
+  &:before, &:after {
+    z-index:-1;
+    height: 100%;
+    position: absolute;
+  content: "";
+  top: 0px;
+  border: none;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: @color;
+  }
+  &:before {
+    width: 51%;
+    left: 0;
+    -webkit-transform:    skewY(@angle);
+  transform:    skewY(@angle);
+  }
+  &:after {
+    width: 50%;
+    right: 0;
+    -webkit-transform:    skewY(-@angle);
+  transform:    skewY(-@angle);
+  }
+}
+.chevron-h (@width, @height, @color, @angle:12deg) {
+
+  width: @width;
+  height: @height;
+  position: relative;
+  border: none;
+  text-align: center;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+
+  &:before, &:after {
+    z-index:-1;
+    width: 100%;
+    position: absolute;
+  content: "";
+  left: 0px;
+  border: none;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: @color;
+  }
+  &:before {
+    height: 51%;
+    top: 0;
+    -webkit-transform:    skewX(@angle);
+  transform:    skewX(@angle);
+  }
+  &:after {
+    height: 50%;
+    bottom: 0;
+    -webkit-transform:    skewX(-@angle);
+  transform:    skewX(-@angle);
+  }
+}
+.chevron-arrow-vertical (@width, @height, @color, @angle:12deg) {
+  .chevron (@width, @height, @color, @angle);
+}
+.chevron-vertical (@width, @height, @color, @angle:12deg, @decalage:12px) {
+  .chevron (@width, @height, @color, @angle);
+  background-color: @color;
+  &:before, &:after {top: @decalage;}
+}
+.chevron-arrow-horizontal (@width, @height, @color, @angle:12deg) {
+  .chevron-h (@width, @height, @color, @angle);
+}
+.chevron-horizontal (@width, @height, @color, @angle:12deg, @decalage:12px) {
+  .chevron-h (@width, @height, @color, @angle);
+  background-color: @color;
+  &:before, &:after {left: @decalage;}
+}

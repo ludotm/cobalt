@@ -1,0 +1,8 @@
+	
+	<?php if (count($form->get('id_template')->options) == 0) : ?>
+		
+		<div style="color:red; text-align:center;">Aucun template disponible pour l'instant, vous pouvez en créer un à partir de l'onglet "Templates"</div>
+
+	<?php endif; ?>
+
+    <?= $form->draw() ?>

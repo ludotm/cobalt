@@ -1,0 +1,52 @@
+
+        <header>
+
+            <div id="logo">
+                <a href="<?= $this->url('admin-page-clients') ?>">
+                    <img src="<?= $this->img('logo_inner.png'); ?>" border="0" />
+                </a>
+            </div>
+
+            <?= $this->menu('header') ?>
+            
+        </header>
+
+        <div id="top-bar">
+            <?= $this->menu('top','right') ?>
+            <div id="top-news">
+                <!--<i class="fa fa-warning"></i> Votre période d'essai termine dans 3 jours-->
+            </div>
+        </div>
+
+        <section id="main-container">
+
+            <div class="container-fluid"> 
+            
+                <div class="row">
+                    <div class="col-xs-12">
+                    
+                    <?php $this->load_page(); ?>
+                    
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+
+                <footer>
+                    <?php if ($this->session->get('username') == 'demo') : ?>
+                    <div style="float:right; font-size:13px; margin-top:40px;">
+                        En naviguant sur ce site, vous acceptez les <a href="<?= $this->url('admin-page-cgu') ?>" target="_blank">conditions générales d'utilisation</a>.
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if ($this->session->defined('note_info') && $this->session->get('note_info') !== false) : ?>
+                    <a href="#" style="display:none;" id="note-info" data-modal="<?= $this->session->get('note_info') ?>" data-modal-title="Note  d'information"></a>
+                    <script>$('#note-info').trigger('click');</script>
+                    <?php $this->session->set('note_info', false) ?>
+                    <?php endif; ?>
+
+                </footer>
+            
+            </div>
+
+        </section>

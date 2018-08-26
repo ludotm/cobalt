@@ -1,0 +1,26 @@
+
+    <h1><?= $this->icon('bullhorn', '') ?> Campagnes</h1>
+    <br>
+
+    <ul id="stats_tabs" class="nav nav-tabs">
+	  <li class="active"><a href="#" data-ajax="<?= $this->url('superadmin-widget-campain_mail', array('action'=>'list')) ?>" data-ajax-target="#campains-container">Campagnes mail</a></li>
+      <li><a href="#" data-ajax="<?= $this->url('superadmin-widget-template', array('action'=>'list')) ?>" data-ajax-target="#campains-container">Templates mail</a></li>
+      <li><a href="#" data-ajax="<?= $this->url('superadmin-widget-campain_sms', array('action'=>'list')) ?>" data-ajax-target="#campains-container">Campagnes SMS</a></li>
+	</ul>
+
+    <div id="campains-container" data-ajax-container>
+
+            <?= $this->widget('campain_mail', array('action'=>'list')) ?>
+ 
+    </div>
+
+    <script>
+    $(document).ready(function(){
+
+    	$('#stats_tabs li a').click(function(){
+    		$('#stats_tabs li').removeClass('active');
+    		$(this).parent().addClass('active');
+    	});
+    });
+    </script>
+

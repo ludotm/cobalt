@@ -1,0 +1,8 @@
+
+    <h1><?= $this->icon('user') ?> Clients</h1>
+
+    <div id="dashboard-container" data-ajax-container="<?= $this->url('superadmin-widget-clients', array('action' => 'list')) ?>">
+
+            <?= $this->widget('clients') ?>
+ 
+    </div>

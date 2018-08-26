@@ -1,0 +1,23 @@
+<h1>Conditions générales d'utilisation</h1>
+<br>
+<div style="width:100%; max-width:900px; height:450px; overflow:auto; border:1px solid #CCC; padding:20px; background-color:#FCFCFC;">
+	<?= $content ?>
+</div>
+<br>
+
+<div style="width:100%; max-width:900px;">
+<?= $form->open_tag() ?>
+<input type="submit" name="submit" value="Continuer" id="valid_cgu" style="float:right; width:120px;" disabled="disabled" />
+<?= $form->get('accept')->draw() ?>
+</form>
+</div>
+
+<script>
+	$('input[name="accept"]').change(function(){
+		if ($(this).is(':checked')) {
+			$('#valid_cgu').prop( "disabled", false );
+		} else {
+			$('#valid_cgu').prop( "disabled", true );
+		}
+	});
+</script>

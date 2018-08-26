@@ -1,0 +1,10 @@
+
+<?php if ($id_template == 0) : ?>
+		
+	<div style="color:red; text-align:center;">Aucun template n'a été séléctionné, aperçu non disponible</div>
+
+<?php else: ?>
+
+<iframe src="<?= $this->url('superadmin-page-mail', array('id'=>$id_campain)) ?>" style="width:600px; height:600px; margin-left:29px; border:1px solid #AAA;"></iframe>
+
+<?php endif; ?>

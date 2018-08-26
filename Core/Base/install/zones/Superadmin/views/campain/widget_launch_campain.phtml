@@ -1,0 +1,123 @@
+
+<?php 
+      if (strtoupper($type) == 'MAIL') {
+            if ($sent) {
+                  echo 'La campagne a été envoyée à '.$count_mails.' adresse(s) email';
+            } else {
+                  echo 'La campagne sera envoyée à '.$count_mails.' adresse(s) email';
+            }
+      } else {
+          if ($sent) {
+                  echo 'La campagne a été envoyée à '.$count_phone.' numéro(s)';
+            } else {
+                  echo 'La campagne sera envoyée à '.$count_phone.' numéro(s)';
+            }  
+      }
+?>
+
+<textarea style="width:100%; height:100px;" disabled="disabled"><?= $user_list ?></textarea>
+
+<br>
+<div id="sending_errors" style="color:#e3360d;"></div>
+<br>
+<div style="text-align:center">
+ 
+      <?php if (strtoupper($type) == 'MAIL') : ?>
+
+            <div>
+
+            <?php if (!$sendable && !$sent) : ?>
+            <div class="campain-info text-red">* Paramètres manquants.</div>
+            
+            <?php else : ?>
+
+                  <?php if ($count_mails > $max_emails && !$sent) : ?>
+                  <div class="campain-info text-red">* Le mode Basic est limité à un envoi de <?= $max_emails ?> mails simultanément. Ciblez votre campagne pour réduire le nombre de mails ou utilisez le mode Premium.</div>
+                  <?php endif; ?>
+
+                  <?php if (!$sent && !$can_use_spothit) : ?>
+                  <div class="campain-info text-red">* Vous devez être abonné pour utiliser le mode Premium.</div>
+                  <?php endif; ?>
+
+                  <?php if ($show_cost) : ?>
+                  <div class="campain-info">* Coût de cette campagne : Basic (0 € HT) - Premium (<?= \Core\Tools::display_price($price_premium) ?> € HT)</div>
+                  <?php endif; ?>
+
+                  <?php if ($show_tarif) : ?>
+                  <div class="campain-info">
+
+                        <div id="consumables-cost-mini" style="display:none;"></div>
+                  </div>
+                  <?php endif; ?>
+            
+            <?php endif; ?>
+
+            </div>
+            <br>
+
+            <div class="text-center">
+              
+                  <a href="#" id="send_button" data-before-send="send_campain_before" data-error-callback="send_campain_error_callback" data-ajax-callback="send_campain_callback" data-ajax-json="<?= $this->url('superadmin-json-send_campain', array('id'=>$campain->id, 'type'=>$type, 'provider'=>'self')); ?>" class="button inverse <?= ( ($count_mails <= $max_emails) && $sendable && !$sent ? '' : 'inactive') ?>">Envoyer en mode Basic</a> 
+
+                  &nbsp;&nbsp;
+
+                  <a href="#" id="send_button2" data-before-send="send_campain_before" data-error-callback="send_campain_error_callback" data-ajax-callback="send_campain_callback" data-ajax-json="<?= $this->url('superadmin-json-send_campain', array('id'=>$campain->id, 'type'=>$type, 'provider'=>'spothit')); ?>" class="button inverse <?= ($sendable && !$sent && $can_use_spothit ? '' : 'inactive') ?>">Envoyer en mode premium</a> 
+
+            </div>
+            <br><br>
+            
+            <div id="processing"></div>
+
+            &nbsp;&nbsp;
+
+      <?php elseif (strtoupper($type) == 'SMS') : ?>
+
+            <div>
+
+            <?php if (!$sendable && !$sent) : ?>
+            <div class="campain-info text-red">* Paramètres manquants.</div>
+            
+            <?php elseif (!$sent && !$can_use_spothit) : ?>
+            <div class="campain-info text-red">* Vous devez être abonné pour pouvoir envoyer des SMS.</div>
+
+            <?php else : ?>
+
+                  <?php if (!$sendable_sms_lowcost && !$sent) : ?>
+                  <div class="campain-info text-red">* Le mode Basic ne permet pas d'envoyer de message d'une longeur supérieure à 160 caractères.</div>
+                  <?php endif; ?>
+
+                  <div class="campain-info">* La mention "STOP au 36184" est légalement obligatoire pour les SMS commerciaux.</div>
+                  <div class="campain-info">* Les SMS commerciaux sont interdits par la loi du lundi au samedi entre 20h et 8h du matin, ainsi que le dimanche et les jours fériés.</div>
+
+                  <?php if ($show_cost) : ?>
+                  <div class="campain-info">* Coût de cette campagne : Basic (<?= \Core\Tools::display_price($price_lowcost) ?> € HT) - Premium (<?= \Core\Tools::display_price($price_premium) ?> € HT)</div>
+                  <?php endif; ?>
+
+                  <?php if ($show_tarif) : ?>
+                  <div class="campain-info">
+
+                        <div id="consumables-cost-mini" style="display:none;"></div>
+                  </div>
+                  <?php endif; ?>
+            
+            <?php endif; ?>
+
+            </div>
+            <br>
+
+
+            <div class="text-center">
+                  <a href="#" id="send_button" data-before-send="send_campain_before" data-error-callback="send_campain_error_callback" data-ajax-callback="send_campain_callback" data-ajax-json="<?= $this->url('superadmin-json-send_campain', array('id'=>$campain->id, 'type'=>$type, 'provider'=>'spothit_lowcost')); ?>" class="button inverse <?= ($sendable && !$sent && $sendable_sms_lowcost && $can_use_spothit ? '' : 'inactive') ?>">Envoyer en mode Basic</a> 
+                  
+                  &nbsp;&nbsp;
+
+                  <a href="#" id="send_button2" data-before-send="send_campain_before" data-error-callback="send_campain_error_callback" data-ajax-callback="send_campain_callback" data-ajax-json="<?= $this->url('superadmin-json-send_campain', array('id'=>$campain->id, 'type'=>$type, 'provider'=>'spothit_premium')); ?>" class="button inverse <?= ($sendable && !$sent && $can_use_spothit ? '' : 'inactive') ?>">Envoyer en mode Premium</a> 
+            </div>
+            <br><br>
+
+            <div id="processing"></div>
+
+            &nbsp;&nbsp;
+
+      <?php endif; ?>
+</div>

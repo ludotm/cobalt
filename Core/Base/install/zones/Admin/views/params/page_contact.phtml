@@ -1,0 +1,28 @@
+
+    <h1><?= $this->icon('question-circle') ?> Contact / Support</h1>
+    <br>
+    <ul id="stats_tabs" class="nav nav-tabs">
+
+
+    <li class="active"><a href="#" data-ajax="<?= $this->url('admin-widget-contact') ?>" data-ajax-target="#contact-container">Contact</a></li>
+
+	<li ><a href="#" data-ajax="<?= $this->url('admin-widget-support') ?>" data-ajax-target="#contact-container">Support</a></li>
+
+	</ul>
+
+    <div id="contact-container" data-ajax-container>
+
+            <?= $this->widget('contact') ?>
+ 
+    </div>
+
+    <script>
+    $(document).ready(function(){
+
+    	$('#stats_tabs li a').click(function(){
+    		$('#stats_tabs li').removeClass('active');
+    		$(this).parent().addClass('active');
+    	});
+    });
+    </script>
+  

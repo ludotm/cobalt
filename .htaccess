@@ -1,0 +1,27 @@
+Options +FollowSymlinks
+
+### bloque le directory listing
+Options -Indexes
+
+### force la variable register globals à off, au cas ou pour des raisons de sécurité
+php_flag register_globals Off
+
+ErrorDocument 404 /error/404
+ErrorDocument 401 /error/401
+
+RewriteEngine On
+RewriteBase /
+###RewriteCond %{REQUEST_FILENAME} !index\.php
+###RewriteCond %{REQUEST_FILENAME} \.php$
+###RewriteRule (.*) index.php [L]
+###RewriteRule ^(.*)$ /index.php [L,QSA]
+
+### Redirige HTTP en HTTPS si on est pas en localhost
+#  RewriteCond %{REMOTE_ADDR} !=127.0.0.1
+#  RewriteCond %{HTTPS} off
+#  RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+
+### Redirige toutes les requêtes vers l'index
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [L]
+

@@ -1,0 +1,17 @@
+<h2>Créer une page</h2><br>
+
+<?php if ($new_route) :  ?>
+
+    La nouvelle page a été créée, reportez la route correspondante : <br><br>
+    <code><?= nl2br($new_route) ?></code>
+
+    <br><br><br>
+
+    Et les fonctions suivantes dans le controlleur : <br><br>
+    <code><?= nl2br($new_function) ?></code>
+
+<?php else : ?>
+
+    <?= $form->draw() ?>
+
+<?php endif; ?>

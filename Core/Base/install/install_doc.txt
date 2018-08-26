@@ -1,0 +1,9 @@
+Installation:
+- ouvrir dans le navigateur url.com/install
+- créér une base de donnée vide
+- suivre les instructions
+
+Reset de l'installation : 
+- Supprimer tous les dossiers sauf Core et plugins, garder index.php et htaccess
+- vider toutes les tables de la BDD
+- supprimer fichier Core/Base/install/modules.txt

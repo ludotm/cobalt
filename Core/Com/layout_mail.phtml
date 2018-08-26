@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+ 
+<meta name="viewport" content="width=device-width"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title><?= $title ?></title>
+<style>
+	body {
+		font-family: verdana, arial;
+	}
+	h1 {
+		margin-top:25px;
+	}
+	h2 {
+		margin-top:12px;
+	}
+	.container {
+		width:100%;
+	}
+	.content {
+		margin:10px;
+	}
+	.unsubscribe {
+		font-size:12px;
+		text-align:center;
+		margin:10px;
+		margin-top:20px;
+	}
+	<?= $css ?>
+</style>
+</head>
+<body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
+ 
+<table class="container" width="600" style="width:600px;">
+<tr>
+<td>
+	<?php if ($banner != '') : ?>
+		<img src="<?= $banner ?>" width="100%" />
+	<?php endif; ?>
+</td>
+</tr>
+<tr>
+<td>
+	<div class="content">
+		
+		<?php if ($body_image != '') : ?>
+			<img src="<?= $body_image ?>" width="100%" />
+		<?php endif; ?>
+
+		<?= $body ?>
+	</div>
+</td>
+</tr>
+<tr>
+<td>
+	<?php if ($online_link) : ?>
+		<div class="unsubscribe">Si vous avez des problèmes pour visualiser cet email, <a href="[ONLINE_LINK]" target="_blank">cliquez ici</a></div>
+	<?php endif; ?>
+
+	<?php if ($unsuscribe_link) : ?>
+		<div class="unsubscribe">Si vous ne souhaitez plus re&ccedilevoir d'emails, <a href="[UNSUSCRIBE_LINK]" target="_blank">cliquez ici</a></div>
+	<?php endif; ?>
+</td>
+</tr>
+</table>
+
+
+</body>
+</html>
